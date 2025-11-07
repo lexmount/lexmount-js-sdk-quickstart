@@ -55,26 +55,3 @@ npm run demo
 # Light browser demo
 npm run light-demo
 ```
-
----
-
-## 📦 Dependencies
-
-- **lexmount** - Lexmount JavaScript SDK
-- **playwright** - Browser automation library
-- **dotenv** - Environment variable management
-- **typescript** - TypeScript support
-- **ts-node** - TypeScript execution environment
-
----
-
-## 📖 Documentation
-
-- [Lexmount SDK Documentation](https://dev.lexmount.net/docs)
-- [Playwright Documentation](https://playwright.dev/)
-
----
-
-## 📝 License
-
-MIT

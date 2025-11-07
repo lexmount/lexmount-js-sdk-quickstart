@@ -55,27 +55,3 @@ npm run demo
 # 轻量浏览器演示
 npm run light-demo
 ```
-
----
-
-## 📦 依赖说明
-
-- **lexmount** - Lexmount JavaScript SDK
-- **playwright** - 浏览器自动化库
-- **dotenv** - 环境变量管理
-- **typescript** - TypeScript 支持
-- **ts-node** - TypeScript 运行环境
-
----
-
-## 📖 文档资源
-
-- [Lexmount SDK 文档](https://dev.lexmount.net/docs)
-- [Playwright 文档](https://playwright.dev/)
-
----
-
-## 📝 许可证
-
-MIT
-
