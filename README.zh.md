@@ -28,13 +28,7 @@
 npm install
 ```
 
-### 2. 安装 Playwright 浏览器
-
-```bash
-npx playwright install chromium
-```
-
-### 3. 配置环境变量
+### 2. 配置环境变量
 
 在项目根目录创建 `.env` 文件：
 
@@ -46,7 +40,7 @@ LEXMOUNT_PROJECT_ID=your_project_id_here
 
 > 在这里获取你的凭证：https://dev.lexmount.net/
 
-### 4. 运行示例
+### 3. 运行示例
 
 ```bash
 # 基础演示

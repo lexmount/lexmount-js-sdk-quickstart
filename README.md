@@ -28,13 +28,7 @@ Quick start examples for Lexmount JavaScript/TypeScript SDK.
 npm install
 ```
 
-### 2. Install Playwright Browsers
-
-```bash
-npx playwright install chromium
-```
-
-### 3. Configure Environment Variables
+### 2. Configure Environment Variables
 
 Create a `.env` file in the project root:
 
@@ -46,7 +40,7 @@ LEXMOUNT_PROJECT_ID=your_project_id_here
 
 > Get your credentials from: https://dev.lexmount.net/
 
-### 4. Run Examples
+### 3. Run Examples
 
 ```bash
 # Basic demo
