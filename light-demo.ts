@@ -22,7 +22,7 @@ async function main() {
   console.log('📡 Creating light browser session...');
   // Create a session with chrome-light-docker mode
   const session = await lm.sessions.create({
-    browserMode: 'chrome-light-docker',
+    browserMode: 'light',
   });
   console.log(`✓ Session created: ${session.sessionId}\n`);
 

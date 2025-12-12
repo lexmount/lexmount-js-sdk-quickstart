@@ -16,7 +16,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "lexmount": "https://npm-1377899528.cos.ap-nanjing.myqcloud.com/packages/lexmount-0.1.1-20251208031523-8f4bcc8.tgz",
+    "lexmount": "https://npm-1377899528.cos.ap-nanjing.myqcloud.com/packages/lexmount-0.1.1-20251212022128-40249ca.tgz",
     "playwright": "^1.40.0",
     "dotenv": "^16.0.0"
   },
