@@ -1,11 +1,14 @@
 {
   "name": "lexmount-js-sdk-quickstart",
-  "version": "0.1.0",
-  "description": "Quick start examples for Lexmount JavaScript/TypeScript SDK",
+  "version": "0.2.0",
+  "description": "Quick start examples for the Lexmount Node.js SDK",
   "private": true,
   "scripts": {
-    "demo": "ts-node demo.ts",
-    "light-demo": "ts-node light-demo.ts"
+    "demo": "tsx ./demo.ts",
+    "light-demo": "tsx ./light-demo.ts",
+    "session-list": "tsx ./session-list.ts",
+    "context-basic": "tsx ./context-basic.ts",
+    "context-list-get": "tsx ./context-list-get.ts"
   },
   "keywords": [
     "lexmount",
@@ -13,17 +16,19 @@
     "playwright",
     "quickstart"
   ],
-  "author": "",
+  "author": {
+    "name": "Lexmount Team",
+    "email": "jiawei.li@lexmount.com"
+  },
   "license": "MIT",
   "dependencies": {
-    "lexmount": "https://npm-1377899528.cos.ap-nanjing.myqcloud.com/packages/lexmount-0.1.1-20251212022128-40249ca.tgz",
-    "playwright": "^1.40.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.5.0",
+    "lexmount": "^0.2.0",
+    "playwright": "^1.52.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.0"
+    "@types/node": "^20.17.28",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }
-
