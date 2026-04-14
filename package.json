@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.2.3",
+    "lexmount": "^0.2.4",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
