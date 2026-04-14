@@ -34,6 +34,26 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 获取指定 context 详情
 - 清理示例创建的 context
 
+### `extension-basic.ts` - Extension 示例
+- 上传浏览器扩展压缩包
+- 列出已上传扩展
+- 使用 `extensionIds` 创建会话
+
+### `proxy-demo.ts` - 代理示例
+- 使用 `proxy` 创建会话
+- 验证远程浏览器可以通过上游代理访问页面
+
+### `inspect-url-demo.ts` - Inspect URL 示例
+- 创建浏览器会话
+- 打印 `inspectUrl` 供手动打开检查
+- 等待用户输入后再关闭会话
+
+### `session-downloads.ts` - 会话下载示例
+- 将远程浏览器下载目录显式设置为 `/config/Downloads`
+- 触发远程文件下载
+- 通过 SDK 查询会话下载列表
+- 将会话下载打包保存为本地 zip
+
 ---
 
 ## 快速开始
@@ -52,6 +72,10 @@ npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
+npm run extension-basic
+npm run proxy-demo
+npm run inspect-url-demo
+npm run session-downloads
 ```
 
 `.env` 内容示例：
@@ -60,4 +84,8 @@ npm run context-list-get
 LEXMOUNT_API_KEY=your_api_key_here
 LEXMOUNT_PROJECT_ID=your_project_id_here
 LEXMOUNT_BASE_URL=https://api.lexmount.cn
+LEXMOUNT_EXTENSION_PATH=/absolute/path/to/extension.zip
+LEXMOUNT_PROXY_SERVER=http://host:port
+LEXMOUNT_PROXY_USERNAME=
+LEXMOUNT_PROXY_PASSWORD=
 ```

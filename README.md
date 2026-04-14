@@ -34,6 +34,26 @@ Quick start examples for the Lexmount Node.js SDK.
 - Get details for a specific context
 - Clean up created contexts
 
+### `extension-basic.ts` - Extension demo
+- Upload a browser extension archive
+- List uploaded extensions
+- Create a session with `extensionIds`
+
+### `proxy-demo.ts` - Proxy demo
+- Create a session with `proxy`
+- Verify the remote browser can access pages through the upstream proxy
+
+### `inspect-url-demo.ts` - Inspect URL demo
+- Create a browser session
+- Print the `inspectUrl` for manual inspection
+- Wait for user input before closing the session
+
+### `session-downloads.ts` - Session downloads demo
+- Configure remote browser download behavior to `/config/Downloads`
+- Trigger a remote file download
+- Query session downloads through the SDK
+- Archive session downloads to a local zip file
+
 ---
 
 ## Quick Start
@@ -52,6 +72,10 @@ npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
+npm run extension-basic
+npm run proxy-demo
+npm run inspect-url-demo
+npm run session-downloads
 ```
 
 The `.env` file should contain:
@@ -60,4 +84,8 @@ The `.env` file should contain:
 LEXMOUNT_API_KEY=your_api_key_here
 LEXMOUNT_PROJECT_ID=your_project_id_here
 LEXMOUNT_BASE_URL=https://api.lexmount.cn
+LEXMOUNT_EXTENSION_PATH=/absolute/path/to/extension.zip
+LEXMOUNT_PROXY_SERVER=http://host:port
+LEXMOUNT_PROXY_USERNAME=
+LEXMOUNT_PROXY_PASSWORD=
 ```
