@@ -44,13 +44,6 @@ async function main(): Promise<void> {
       throw new Error('No page available after connecting to the remote browser.');
     }
 
-    const cdp = await browser.newBrowserCDPSession();
-    await cdp.send('Browser.setDownloadBehavior', {
-      behavior: 'allow',
-      downloadPath: '/config/Downloads',
-      eventsEnabled: true,
-    });
-
     await page.setContent(`<a id="dl" href="${DOWNLOAD_URL}" download>Download</a>`);
     const downloadPromise = page.waitForEvent('download');
     await page.locator('#dl').click();

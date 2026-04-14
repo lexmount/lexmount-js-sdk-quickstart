@@ -49,7 +49,6 @@ Quick start examples for the Lexmount Node.js SDK.
 - Wait for user input before closing the session
 
 ### `session-downloads.ts` - Session downloads demo
-- Configure remote browser download behavior to `/config/Downloads`
 - Trigger a remote file download
 - Query session downloads through the SDK
 - Archive session downloads to a local zip file

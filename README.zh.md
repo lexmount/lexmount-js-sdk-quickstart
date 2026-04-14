@@ -49,7 +49,6 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 等待用户输入后再关闭会话
 
 ### `session-downloads.ts` - 会话下载示例
-- 将远程浏览器下载目录显式设置为 `/config/Downloads`
 - 触发远程文件下载
 - 通过 SDK 查询会话下载列表
 - 将会话下载打包保存为本地 zip
