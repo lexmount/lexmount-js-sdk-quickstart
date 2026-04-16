@@ -9,6 +9,7 @@
     "session-list": "tsx ./session-list.ts",
     "context-basic": "tsx ./context-basic.ts",
     "context-list-get": "tsx ./context-list-get.ts",
+    "context-fork": "tsx ./context-fork.ts",
     "extension-basic": "tsx ./extension-basic.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
@@ -27,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.2.5",
+    "lexmount": "^0.2.6",
     "playwright": "^1.52.0"
   },
   "devDependencies": {

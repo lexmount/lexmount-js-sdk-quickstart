@@ -34,6 +34,12 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 获取指定 context 详情
 - 清理示例创建的 context
 
+### `context-fork.ts` - context fork 示例
+- 创建 source context
+- 基于 source fork 出新的 context
+- 查询 fork 后 context 的详情
+- 清理 source 和 forked context
+
 ### `extension-basic.ts` - Extension 示例
 - 上传浏览器扩展压缩包
 - 列出已上传扩展
@@ -71,6 +77,7 @@ npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
+npm run context-fork
 npm run extension-basic
 npm run proxy-demo
 npm run inspect-url-demo
