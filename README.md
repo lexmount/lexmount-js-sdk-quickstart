@@ -34,6 +34,12 @@ Quick start examples for the Lexmount Node.js SDK.
 - Get details for a specific context
 - Clean up created contexts
 
+### `context-fork.ts` - Context fork demo
+- Create a source context
+- Fork it into a new context
+- Query the forked context details
+- Clean up both source and forked contexts
+
 ### `extension-basic.ts` - Extension demo
 - Upload a browser extension archive
 - List uploaded extensions
@@ -71,6 +77,7 @@ npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
+npm run context-fork
 npm run extension-basic
 npm run proxy-demo
 npm run inspect-url-demo
