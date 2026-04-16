@@ -4,25 +4,16 @@ import { ContextLockedError, ContextNotFoundError, Lexmount } from 'lexmount';
 config({ override: true });
 
 async function main(): Promise<void> {
+  const sourceId = process.argv[2];
+  if (!sourceId) {
+    throw new Error('Usage: npm run context-fork -- <context_id>');
+  }
+
   const client = new Lexmount();
-  let sourceId: string | undefined;
-  let forkedId: string | undefined;
 
   try {
-    const source = await client.contexts.create({
-      metadata: {
-        scenario: 'quickstart-context-fork',
-      },
-    });
-    sourceId = source.id;
-    console.log(`Source context created: ${sourceId}`);
-
     const forked = await client.contexts.fork(sourceId);
-    forkedId = forked.id;
-    console.log(`Forked context created: ${forkedId}`);
-
-    const details = await client.contexts.get(forkedId);
-    console.log(`Forked context status: ${details.status}`);
+    console.log(`Forked context id: ${forked.id}`);
   } catch (error: unknown) {
     if (error instanceof ContextLockedError) {
       console.error(`Source context is locked: ${error.message}`);
@@ -36,12 +27,6 @@ async function main(): Promise<void> {
     }
     throw error;
   } finally {
-    if (forkedId) {
-      await client.contexts.delete(forkedId).catch(() => undefined);
-    }
-    if (sourceId) {
-      await client.contexts.delete(sourceId).catch(() => undefined);
-    }
     client.close();
   }
 }
