@@ -1,4 +1,6 @@
 import { config } from 'dotenv';
+import { createInterface } from 'node:readline/promises';
+import { stdin as input, stdout as output } from 'node:process';
 import { Lexmount } from 'lexmount';
 
 config({ override: true });
@@ -20,6 +22,7 @@ type SessionsWithTargets = {
 async function main(): Promise<void> {
   const client = new Lexmount();
   let sessionId: string | null = null;
+  const readline = createInterface({ input, output });
 
   try {
     const session = await client.sessions.create();
@@ -44,7 +47,10 @@ async function main(): Promise<void> {
       );
       console.log('');
     }
+
+    await readline.question('Press Enter to close the session...');
   } finally {
+    readline.close();
     if (sessionId) {
       await client.sessions.delete({ sessionId }).catch(() => undefined);
     }
