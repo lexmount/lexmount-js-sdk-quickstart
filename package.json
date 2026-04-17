@@ -13,6 +13,7 @@
     "extension-basic": "tsx ./extension-basic.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
+    "session-targets": "tsx ./session-targets.ts",
     "session-downloads": "tsx ./session-downloads.ts"
   },
   "keywords": [
@@ -28,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.2.6",
+    "lexmount": "^0.2.7",
     "playwright": "^1.52.0"
   },
   "devDependencies": {

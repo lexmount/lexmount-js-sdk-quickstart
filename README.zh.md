@@ -53,6 +53,11 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 打印 `inspectUrl` 供手动打开检查
 - 等待用户输入后再关闭会话
 
+### `session-targets.ts` - 会话 targets 示例
+- 创建浏览器会话
+- 通过 SDK 查询 `/json` target 列表
+- 打印每个 target 的 `inspectUrl`、页面 URL 和 websocket URL
+
 ### `session-downloads.ts` - 会话下载示例
 - 触发远程文件下载
 - 通过 SDK 查询会话下载列表
@@ -80,6 +85,7 @@ npm run context-fork -- <context_id>
 npm run extension-basic
 npm run proxy-demo
 npm run inspect-url-demo
+npm run session-targets
 npm run session-downloads
 ```
 

@@ -53,6 +53,11 @@ Quick start examples for the Lexmount Node.js SDK.
 - Print the `inspectUrl` for manual inspection
 - Wait for user input before closing the session
 
+### `session-targets.ts` - Session targets demo
+- Create a browser session
+- Query `/json` targets through the SDK
+- Print each target's `inspectUrl`, page URL, and websocket URL
+
 ### `session-downloads.ts` - Session downloads demo
 - Trigger a remote file download
 - Query session downloads through the SDK
@@ -80,6 +85,7 @@ npm run context-fork -- <context_id>
 npm run extension-basic
 npm run proxy-demo
 npm run inspect-url-demo
+npm run session-targets
 npm run session-downloads
 ```
 
