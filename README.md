@@ -85,11 +85,6 @@ Quick start examples for the Lexmount Node.js SDK.
 - Query session downloads through the SDK
 - Archive session downloads to a local zip file
 
-### `new-page-repro.ts` - New page repro demo
-- Create a `normal` or `light` browser session
-- Connect over CDP with Playwright
-- Attempt `context.newPage()` multiple times and print results
-
 ---
 
 ## Quick Start
@@ -117,7 +112,6 @@ npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
 npm run inspect-url-demo
-npm run new-page-repro -- --browser-mode normal
 npm run session-targets
 npm run session-downloads
 ```

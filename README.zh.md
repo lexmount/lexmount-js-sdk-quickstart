@@ -85,11 +85,6 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 通过 SDK 查询会话下载列表
 - 将会话下载打包保存为本地 zip
 
-### `new-page-repro.ts` - newPage 复现示例
-- 创建 `normal` 或 `light` 浏览器会话
-- 通过 Playwright CDP 连接
-- 多次执行 `context.newPage()` 并打印结果
-
 ---
 
 ## 快速开始
@@ -117,7 +112,6 @@ npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
 npm run inspect-url-demo
-npm run new-page-repro -- --browser-mode normal
 npm run session-targets
 npm run session-downloads
 ```

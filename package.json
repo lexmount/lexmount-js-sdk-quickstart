@@ -18,7 +18,6 @@
     "extension-list-get": "tsx ./extension-list-get.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
-    "new-page-repro": "tsx ./new-page-repro.ts",
     "session-targets": "tsx ./session-targets.ts",
     "session-downloads": "tsx ./session-downloads.ts"
   },
