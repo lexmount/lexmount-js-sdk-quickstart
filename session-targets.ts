@@ -48,7 +48,9 @@ async function main(): Promise<void> {
       console.log('');
     }
 
-    await readline.question('Press Enter to close the session...');
+    if (process.env.LEXMOUNT_QUICKSTART_NON_INTERACTIVE !== '1') {
+      await readline.question('Press Enter to close the session...');
+    }
   } finally {
     readline.close();
     if (sessionId) {

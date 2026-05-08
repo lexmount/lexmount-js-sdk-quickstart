@@ -20,7 +20,8 @@
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
     "new-page-repro": "tsx ./new-page-repro.ts",
     "session-targets": "tsx ./session-targets.ts",
-    "session-downloads": "tsx ./session-downloads.ts"
+    "session-downloads": "tsx ./session-downloads.ts",
+    "e2e-tool": "tsx ./e2e-tool.ts"
   },
   "keywords": [
     "lexmount",
