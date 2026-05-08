@@ -22,9 +22,7 @@ async function main(): Promise<void> {
   console.log(`inspect_url: ${session.inspectUrl}`);
 
   try {
-    if (process.env.LEXMOUNT_QUICKSTART_NON_INTERACTIVE !== '1') {
-      await waitForEnter();
-    }
+    await waitForEnter();
   } finally {
     await session.close();
     client.close();
