@@ -13,6 +13,15 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 校验页面标题
 - 保存截图
 
+### `catalog-info.ts` - Catalog 信息示例
+- 通过 `client.catalogInfo()` 查询公开 endpoint catalog
+- 打印可用 region 和 host
+
+### `connection-demo.ts` - 直连示例
+- 基于 `LEXMOUNT_BASE_URL` 构造 websocket 直连地址
+- 通过 `/connection?project_id=...&api_key=...` 连接
+- 访问 `https://example.com` 并保存 `connection_demo.png`
+
 ### `light-demo.ts` - 轻量浏览器示例
 - 使用 `light` 浏览器模式
 - 访问新浪新闻
@@ -39,10 +48,23 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 基于 source fork 出新的 context
 - 打印 fork 后的新 id
 
+### `context-lock-handling.ts` - context 锁处理示例
+- 创建 read-write context 会话
+- 演示通过 `ContextLockedError` 处理锁冲突
+
+### `context-modes.ts` - context 模式示例
+- 创建 context
+- 运行一个 `readWrite` 会话和两个并发 `readOnly` 会话
+
 ### `extension-basic.ts` - Extension 示例
 - 上传浏览器扩展压缩包
 - 列出已上传扩展
 - 使用 `extensionIds` 创建会话
+
+### `extension-list-get.ts` - Extension list/get 示例
+- 列出已上传扩展
+- 获取一个扩展的详情
+- 当设置 `LEXMOUNT_EXTENSION_PATH` 时，额外演示上传和删除扩展
 
 ### `proxy-demo.ts` - 代理示例
 - 使用 `proxy` 创建会话
@@ -63,6 +85,11 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 通过 SDK 查询会话下载列表
 - 将会话下载打包保存为本地 zip
 
+### `new-page-repro.ts` - newPage 复现示例
+- 创建 `normal` 或 `light` 浏览器会话
+- 通过 Playwright CDP 连接
+- 多次执行 `context.newPage()` 并打印结果
+
 ---
 
 ## 快速开始
@@ -77,14 +104,20 @@ cp .env.example .env
 
 # 3. 运行示例
 npm run demo
+npm run catalog-info
+npm run connection-demo
 npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
 npm run context-fork -- <context_id>
+npm run context-lock-handling
+npm run context-modes
 npm run extension-basic
+npm run extension-list-get
 npm run proxy-demo
 npm run inspect-url-demo
+npm run new-page-repro -- --browser-mode normal
 npm run session-targets
 npm run session-downloads
 ```

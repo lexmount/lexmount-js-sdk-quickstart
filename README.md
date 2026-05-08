@@ -13,6 +13,15 @@ Quick start examples for the Lexmount Node.js SDK.
 - Verify the page title
 - Take a screenshot
 
+### `catalog-info.ts` - Catalog info demo
+- Query the public endpoint catalog through `client.catalogInfo()`
+- Print available regions and hosts
+
+### `connection-demo.ts` - Direct connection demo
+- Build a direct websocket URL from `LEXMOUNT_BASE_URL`
+- Connect through `/connection?project_id=...&api_key=...`
+- Visit `https://example.com` and save `connection_demo.png`
+
 ### `light-demo.ts` - Light browser demo
 - Use `light` browser mode
 - Visit Sina News
@@ -39,10 +48,23 @@ Quick start examples for the Lexmount Node.js SDK.
 - Fork it into a new context
 - Print the forked context id
 
+### `context-lock-handling.ts` - Context lock handling demo
+- Create a read-write context session
+- Demonstrate lock conflict handling through `ContextLockedError`
+
+### `context-modes.ts` - Context modes demo
+- Create a context
+- Run one `readWrite` session and two concurrent `readOnly` sessions
+
 ### `extension-basic.ts` - Extension demo
 - Upload a browser extension archive
 - List uploaded extensions
 - Create a session with `extensionIds`
+
+### `extension-list-get.ts` - Extension list/get demo
+- List uploaded extensions
+- Get details for one extension
+- Optionally upload and delete an extension when `LEXMOUNT_EXTENSION_PATH` is set
 
 ### `proxy-demo.ts` - Proxy demo
 - Create a session with `proxy`
@@ -63,6 +85,11 @@ Quick start examples for the Lexmount Node.js SDK.
 - Query session downloads through the SDK
 - Archive session downloads to a local zip file
 
+### `new-page-repro.ts` - New page repro demo
+- Create a `normal` or `light` browser session
+- Connect over CDP with Playwright
+- Attempt `context.newPage()` multiple times and print results
+
 ---
 
 ## Quick Start
@@ -77,14 +104,20 @@ cp .env.example .env
 
 # 3. Run examples
 npm run demo
+npm run catalog-info
+npm run connection-demo
 npm run light-demo
 npm run session-list
 npm run context-basic
 npm run context-list-get
 npm run context-fork -- <context_id>
+npm run context-lock-handling
+npm run context-modes
 npm run extension-basic
+npm run extension-list-get
 npm run proxy-demo
 npm run inspect-url-demo
+npm run new-page-repro -- --browser-mode normal
 npm run session-targets
 npm run session-downloads
 ```

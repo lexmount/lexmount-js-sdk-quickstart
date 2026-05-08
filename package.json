@@ -5,14 +5,20 @@
   "private": true,
   "scripts": {
     "demo": "tsx ./demo.ts",
+    "catalog-info": "tsx ./catalog-info.ts",
+    "connection-demo": "tsx ./connection-demo.ts",
     "light-demo": "tsx ./light-demo.ts",
     "session-list": "tsx ./session-list.ts",
     "context-basic": "tsx ./context-basic.ts",
     "context-list-get": "tsx ./context-list-get.ts",
     "context-fork": "tsx ./context-fork.ts",
+    "context-lock-handling": "tsx ./context-lock-handling.ts",
+    "context-modes": "tsx ./context-modes.ts",
     "extension-basic": "tsx ./extension-basic.ts",
+    "extension-list-get": "tsx ./extension-list-get.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
+    "new-page-repro": "tsx ./new-page-repro.ts",
     "session-targets": "tsx ./session-targets.ts",
     "session-downloads": "tsx ./session-downloads.ts"
   },
@@ -29,7 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.2.7",
+    "lexmount": "^0.5.2",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
