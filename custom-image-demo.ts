@@ -26,7 +26,7 @@ async function main(): Promise<void> {
   const client = new Lexmount();
   let browser: Browser | undefined;
 
-  const createOptions = { customImageId } as any;
+  const createOptions = { browserMode: 'normal' as const, customImageId };
   const session = await client.sessions.create(createOptions);
   console.log(`Session created with custom image: ${session.id}`);
 
