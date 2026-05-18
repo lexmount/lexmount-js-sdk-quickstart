@@ -22,6 +22,11 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 通过 `/connection?project_id=...&api_key=...` 连接
 - 访问 `https://example.com` 并保存 `connection_demo.png`
 
+### `custom-image-demo.ts` - 自定义镜像示例
+- 使用 `customImageId` 创建浏览器会话
+- 支持从命令行传入 `--custom_image_id`
+- 连接会话并验证浏览器可以打开页面
+
 ### `light-demo.ts` - 轻量浏览器示例
 - 使用 `light` 浏览器模式
 - 访问新浪新闻
@@ -101,6 +106,7 @@ cp .env.example .env
 npm run demo
 npm run catalog-info
 npm run connection-demo
+npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
 npm run light-demo
 npm run session-list
 npm run context-basic
@@ -126,4 +132,5 @@ LEXMOUNT_EXTENSION_PATH=/absolute/path/to/extension.zip
 LEXMOUNT_PROXY_SERVER=http://host:port
 LEXMOUNT_PROXY_USERNAME=
 LEXMOUNT_PROXY_PASSWORD=
+LEXMOUNT_CUSTOM_IMAGE_ID=code.lexmount.net/neng/chrome:tag
 ```

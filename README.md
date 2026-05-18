@@ -22,6 +22,11 @@ Quick start examples for the Lexmount Node.js SDK.
 - Connect through `/connection?project_id=...&api_key=...`
 - Visit `https://example.com` and save `connection_demo.png`
 
+### `custom-image-demo.ts` - Custom image demo
+- Create a browser session with `customImageId`
+- Accept `--custom_image_id` from the command line
+- Connect to the session and verify the browser can open a page
+
 ### `light-demo.ts` - Light browser demo
 - Use `light` browser mode
 - Visit Sina News
@@ -101,6 +106,7 @@ cp .env.example .env
 npm run demo
 npm run catalog-info
 npm run connection-demo
+npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
 npm run light-demo
 npm run session-list
 npm run context-basic
@@ -126,4 +132,5 @@ LEXMOUNT_EXTENSION_PATH=/absolute/path/to/extension.zip
 LEXMOUNT_PROXY_SERVER=http://host:port
 LEXMOUNT_PROXY_USERNAME=
 LEXMOUNT_PROXY_PASSWORD=
+LEXMOUNT_CUSTOM_IMAGE_ID=code.lexmount.net/neng/chrome:tag
 ```
