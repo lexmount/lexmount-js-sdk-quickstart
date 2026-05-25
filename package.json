@@ -8,6 +8,7 @@
     "catalog-info": "tsx ./catalog-info.ts",
     "connection-demo": "tsx ./connection-demo.ts",
     "custom-image-demo": "tsx ./custom-image-demo.ts",
+    "window-size-demo": "tsx ./window-size-demo.ts",
     "light-demo": "tsx ./light-demo.ts",
     "session-list": "tsx ./session-list.ts",
     "context-basic": "tsx ./context-basic.ts",
@@ -35,7 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.5.7",
+    "lexmount": "^0.5.8",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
