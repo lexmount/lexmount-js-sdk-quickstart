@@ -27,6 +27,11 @@ Quick start examples for the Lexmount Node.js SDK.
 - Accept `--custom_image_id` from the command line
 - Connect to the session and verify the browser can open a page
 
+### `window-size-demo.ts` - Window size demo
+- Create a browser session with `windowSize`
+- Accept `--window_size`, defaulting to `1920,1080`
+- Connect to the session and print the initial viewport
+
 ### `light-demo.ts` - Light browser demo
 - Use `light` browser mode
 - Visit Sina News
@@ -107,6 +112,7 @@ npm run demo
 npm run catalog-info
 npm run connection-demo
 npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
+npm run window-size-demo -- --window_size 1920,1080
 npm run light-demo
 npm run session-list
 npm run context-basic
@@ -133,4 +139,5 @@ LEXMOUNT_PROXY_SERVER=http://host:port
 LEXMOUNT_PROXY_USERNAME=
 LEXMOUNT_PROXY_PASSWORD=
 LEXMOUNT_CUSTOM_IMAGE_ID=code.lexmount.net/neng/chrome:tag
+LEXMOUNT_WINDOW_SIZE=1920,1080
 ```

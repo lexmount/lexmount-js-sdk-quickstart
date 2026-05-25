@@ -27,6 +27,11 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 支持从命令行传入 `--custom_image_id`
 - 连接会话并验证浏览器可以打开页面
 
+### `window-size-demo.ts` - 窗口尺寸示例
+- 使用 `windowSize` 创建浏览器会话
+- 支持从命令行传入 `--window_size`，默认 `1920,1080`
+- 连接会话并打印初始 viewport
+
 ### `light-demo.ts` - 轻量浏览器示例
 - 使用 `light` 浏览器模式
 - 访问新浪新闻
@@ -107,6 +112,7 @@ npm run demo
 npm run catalog-info
 npm run connection-demo
 npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
+npm run window-size-demo -- --window_size 1920,1080
 npm run light-demo
 npm run session-list
 npm run context-basic
@@ -133,4 +139,5 @@ LEXMOUNT_PROXY_SERVER=http://host:port
 LEXMOUNT_PROXY_USERNAME=
 LEXMOUNT_PROXY_PASSWORD=
 LEXMOUNT_CUSTOM_IMAGE_ID=code.lexmount.net/neng/chrome:tag
+LEXMOUNT_WINDOW_SIZE=1920,1080
 ```
