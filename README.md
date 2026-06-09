@@ -80,6 +80,10 @@ Quick start examples for the Lexmount Node.js SDK.
 - Create a session with `proxy`
 - Verify the remote browser can access pages through the upstream proxy
 
+### `official-proxy-demo.ts` - Official proxy demo
+- Create a session with `officialProxy: true`
+- Verify the remote browser can access pages through the Lexmount official proxy pool
+
 ### `inspect-url-demo.ts` - Inspect URL demo
 - Create a browser session
 - Print the `inspectUrl` for manual inspection
@@ -123,6 +127,7 @@ npm run context-modes
 npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
+npm run official-proxy-demo
 npm run inspect-url-demo
 npm run session-targets
 npm run session-downloads
