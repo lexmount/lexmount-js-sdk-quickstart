@@ -80,6 +80,10 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 使用 `proxy` 创建会话
 - 验证远程浏览器可以通过上游代理访问页面
 
+### `official-proxy-demo.ts` - 官方代理示例
+- 使用 `officialProxy: true` 创建会话
+- 验证远程浏览器可以通过 Lexmount 官方代理池访问页面
+
 ### `inspect-url-demo.ts` - Inspect URL 示例
 - 创建浏览器会话
 - 打印 `inspectUrl` 供手动打开检查
@@ -123,6 +127,7 @@ npm run context-modes
 npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
+npm run official-proxy-demo
 npm run inspect-url-demo
 npm run session-targets
 npm run session-downloads

@@ -19,6 +19,7 @@
     "extension-basic": "tsx ./extension-basic.ts",
     "extension-list-get": "tsx ./extension-list-get.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
+    "official-proxy-demo": "tsx ./official-proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
     "session-targets": "tsx ./session-targets.ts",
     "session-downloads": "tsx ./session-downloads.ts"
