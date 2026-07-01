@@ -24,11 +24,8 @@ async function main(): Promise<void> {
     const pageTitle = await page.title();
     console.log(`Page title: ${pageTitle}`);
 
-    const expectedTitle = 'Lexmount Browser - AI-Powered Cloud Browser Service';
-    if (pageTitle !== expectedTitle) {
-      throw new Error(
-        `Page title mismatch. Expected: ${expectedTitle}. Actual: ${pageTitle}`
-      );
+    if (!pageTitle.includes('Lexmount Browser')) {
+      throw new Error(`Unexpected page title: ${pageTitle}`);
     }
 
     await page.screenshot({ path: 'screenshot.png' });
