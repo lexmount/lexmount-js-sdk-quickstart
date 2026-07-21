@@ -44,13 +44,13 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 清理会话
 
 ### `context-basic.ts` - 基础 context 示例
-- 创建 context
+- 创建带 `description` 的 context
 - 使用该 context 启动 `readWrite` 会话
 
 ### `context-list-get.ts` - context 列表与详情示例
-- 创建多个 context
-- 列出 context
-- 获取指定 context 详情
+- 创建多个带描述的 context
+- 列出 context 并打印展示名称
+- 获取指定 context 详情和展示名称
 - 清理示例创建的 context
 
 ### `context-fork.ts` - context fork 示例

@@ -44,13 +44,13 @@ Quick start examples for the Lexmount Node.js SDK.
 - Clean up sessions
 
 ### `context-basic.ts` - Basic context demo
-- Create a context
+- Create a context with `description`
 - Start a `readWrite` session with that context
 
 ### `context-list-get.ts` - Context list/get demo
-- Create contexts
-- List contexts
-- Get details for a specific context
+- Create contexts with descriptions
+- List contexts and print display names
+- Get details for a specific context, including its display name
 - Clean up created contexts
 
 ### `context-fork.ts` - Context fork demo

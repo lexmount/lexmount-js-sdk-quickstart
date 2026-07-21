@@ -9,9 +9,11 @@ async function main(): Promise<void> {
 
   try {
     const first = await client.contexts.create({
+      description: 'First example context',
       metadata: { label: 'first-example-context' },
     });
     const second = await client.contexts.create({
+      description: 'Second example context',
       metadata: { label: 'second-example-context' },
     });
 
@@ -21,11 +23,11 @@ async function main(): Promise<void> {
     console.log(`Total contexts found: ${contexts.length}`);
 
     for (const context of contexts) {
-      console.log(`${context.id} ${context.status}`);
+      console.log(`${context.displayName} ${context.status} (${context.id})`);
     }
 
     const details = await client.contexts.get(first.id);
-    console.log(`Details for ${details.id}: ${details.status}`);
+    console.log(`Details for ${details.displayName}: ${details.status} (${details.id})`);
   } finally {
     for (const contextId of createdContextIds) {
       await client.contexts.delete(contextId).catch(() => undefined);
