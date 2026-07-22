@@ -11,10 +11,11 @@ async function main(): Promise<void> {
 
   try {
     const persistentContext = await client.contexts.create({
+      description: 'Quickstart login context',
       metadata: {},
     });
     createdContextId = persistentContext.id;
-    console.log(`Context created: ${createdContextId}`);
+    console.log(`Context created: ${persistentContext.displayName} (${createdContextId})`);
 
     const session = await client.sessions.create({
       context: { id: createdContextId, mode: 'readWrite' },
