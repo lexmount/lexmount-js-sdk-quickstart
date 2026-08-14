@@ -34,6 +34,7 @@ Quick start examples for the Lexmount Node.js SDK.
 
 ### `light-demo.ts` - Light browser demo
 - Use `light` browser mode
+- Show the per-session `enableLightmountResource` switch
 - Visit Sina News
 - Extract all links and save them to `links.txt`
 
