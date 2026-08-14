@@ -34,6 +34,7 @@ Lexmount Node.js SDK 的快速开始示例项目。
 
 ### `light-demo.ts` - 轻量浏览器示例
 - 使用 `light` 浏览器模式
+- 显式开启 LightMount layout，并展示单会话 `enableLightmountResource` 开关
 - 访问新浪新闻
 - 提取所有链接并保存到 `links.txt`
 
