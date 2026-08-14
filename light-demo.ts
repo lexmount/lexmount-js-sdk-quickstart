@@ -11,7 +11,8 @@ async function main(): Promise<void> {
 
   const session = await client.sessions.create({
     browserMode: 'light',
-    // Set false to disable MOLI_RESOURCE for only this Light session.
+    enableLightmountLayout: true,
+    // Set false to disable MOLI_RESOURCE while keeping layout enabled.
     enableLightmountResource: true,
   });
   console.log(`Session created: ${session.id}`);
