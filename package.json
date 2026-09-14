@@ -4,6 +4,7 @@
   "description": "Quick start examples for the Lexmount Node.js SDK",
   "private": true,
   "scripts": {
+    "test": "tsx --test ./*.test.ts",
     "demo": "tsx ./demo.ts",
     "catalog-info": "tsx ./catalog-info.ts",
     "connection-demo": "tsx ./connection-demo.ts",
