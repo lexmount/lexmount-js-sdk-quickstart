@@ -29,8 +29,8 @@ Lexmount Node.js SDK 的快速开始示例项目。
 
 ### `window-size-demo.ts` - 窗口尺寸示例
 - 使用 `windowSize` 创建浏览器会话
-- 支持从命令行传入 `--window_size`，默认 `1920,1080`
-- 连接会话并打印初始 viewport
+- 支持从命令行传入 `--window_size`（也兼容 `--window-size` 或 `--window size`），默认 `1920,1080`
+- 连接会话并打印真实的初始 viewport
 
 ### `light-demo.ts` - 轻量浏览器示例
 - 使用 `light` 浏览器模式
@@ -117,7 +117,7 @@ npm run demo
 npm run catalog-info
 npm run connection-demo
 npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
-npm run window-size-demo -- --window_size 1920,1080
+npm run window-size-demo -- --window_size 800,600
 npm run light-demo
 npm run session-list
 npm run context-basic

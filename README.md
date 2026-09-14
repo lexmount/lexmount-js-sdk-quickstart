@@ -29,8 +29,8 @@ Quick start examples for the Lexmount Node.js SDK.
 
 ### `window-size-demo.ts` - Window size demo
 - Create a browser session with `windowSize`
-- Accept `--window_size`, defaulting to `1920,1080`
-- Connect to the session and print the initial viewport
+- Accept `--window_size` (also `--window-size` or `--window size`), defaulting to `1920,1080`
+- Connect to the session and print the live initial viewport
 
 ### `light-demo.ts` - Light browser demo
 - Use `light` browser mode
@@ -117,7 +117,7 @@ npm run demo
 npm run catalog-info
 npm run connection-demo
 npm run custom-image-demo -- --custom_image_id code.lexmount.net/neng/chrome:tag
-npm run window-size-demo -- --window_size 1920,1080
+npm run window-size-demo -- --window_size 800,600
 npm run light-demo
 npm run session-list
 npm run context-basic
