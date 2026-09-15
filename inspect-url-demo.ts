@@ -8,6 +8,7 @@ async function waitForEnter(): Promise<void> {
     process.stdin.resume();
     process.stdout.write('Press Enter to close the session...');
     process.stdin.once('data', () => {
+      process.stdin.pause();
       process.stdout.write('\n');
       resolve();
     });
