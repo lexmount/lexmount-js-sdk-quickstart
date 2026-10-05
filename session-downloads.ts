@@ -1,10 +1,8 @@
 import { writeFile } from 'node:fs/promises';
 import { setTimeout as delay } from 'node:timers/promises';
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 const DOWNLOAD_URL = 'https://proof.ovh.net/files/1Mb.dat';
 const DOWNLOAD_TIMEOUT_MS = 60_000;
@@ -29,6 +27,7 @@ async function waitForCompletedDownloads(client: Lexmount, sessionId: string) {
 }
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   let browser: Browser | undefined;
 

@@ -104,13 +104,15 @@ Quick start examples for the Lexmount Node.js SDK.
 
 ## Quick Start
 
+Requires Node.js 18.17 or newer.
+
 ```bash
 # 1. Install dependencies
 npm install
 
 # 2. Create .env from the template
 cp .env.example .env
-# Edit .env and fill in your API key and project ID
+# On a local macOS/Windows terminal, missing credentials trigger browser sign-in.
 
 # 3. Run examples
 npm run demo
@@ -139,7 +141,7 @@ The `.env` file should contain:
 ```bash
 LEXMOUNT_API_KEY=your_api_key_here
 LEXMOUNT_PROJECT_ID=your_project_id_here
-LEXMOUNT_BASE_URL=https://api.lexmount.cn
+LEXMOUNT_BASE_URL=https://api.lexmount.com
 LEXMOUNT_EXTENSION_PATH=/absolute/path/to/extension.zip
 LEXMOUNT_PROXY_SERVER=http://host:port
 LEXMOUNT_PROXY_USERNAME=
@@ -147,3 +149,17 @@ LEXMOUNT_PROXY_PASSWORD=
 LEXMOUNT_CUSTOM_IMAGE_ID=code.lexmount.net/neng/chrome:tag
 LEXMOUNT_WINDOW_SIZE=1920,1080
 ```
+
+
+## Credentials and browser sign-in
+
+Every demo checks `LEXMOUNT_PROJECT_ID` and `LEXMOUNT_API_KEY` before making API requests. It loads `.env` from the **current working directory**, with `.env` taking precedence over exported environment variables. Empty values and the example placeholders count as missing. Existing complete credentials are used without opening a browser.
+
+- Default API: `https://api.lexmount.com`; website: `https://browser.lexmount.com`.
+- With missing credentials, an interactive local **macOS or Windows** terminal opens the system browser for sign-in and authorization. Return to the terminal after approving; the demo continues automatically.
+- The PKCE flow uses a temporary `127.0.0.1` callback and exchanges a one-time code over HTTPS. Both credentials and the matching API base URL are saved together to `.env`, preserving unrelated settings. Newly written files have owner-only permissions on POSIX systems; on Windows protect the project directory with your user account's ACLs.
+- On Linux, SSH, CI, non-interactive terminals, or when browser authorization fails/times out (3 minutes), the demo exits with website/manual setup instructions. Fill in the two values and rerun. You can also set both environment variables without an `.env` file in CI.
+- Explicit `https://api.lexmount.cn` uses `https://browser.lexmount.cn` for authorization. Other custom API URLs are preserved and require manual credentials from their matching environment; they never silently log in to `.com`.
+- No credentials are saved on an unsuccessful exchange. If `.env` is changed while signing in, rerun the demo to avoid overwriting those edits. Do not commit `.env`.
+
+Run examples from this repository directory so they share the same `.env`.

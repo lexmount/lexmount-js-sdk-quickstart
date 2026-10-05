@@ -1,8 +1,6 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 function getArgValue(name: string): string | undefined {
   const prefix = `${name}=`;
@@ -18,6 +16,7 @@ function getArgValue(name: string): string | undefined {
 }
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const customImageId = getArgValue('--custom_image_id') ?? process.env.LEXMOUNT_CUSTOM_IMAGE_ID;
   if (!customImageId) {
     throw new Error('Missing --custom_image_id or LEXMOUNT_CUSTOM_IMAGE_ID');

@@ -28,3 +28,6 @@ Thumbs.db
 *.swo
 *~
 
+
+# Temporary credential files used by atomic .env updates
+.env.*.tmp

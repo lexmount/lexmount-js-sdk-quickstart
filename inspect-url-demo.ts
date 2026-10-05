@@ -1,7 +1,5 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 async function waitForEnter(): Promise<void> {
   await new Promise<void>((resolve) => {
@@ -16,6 +14,7 @@ async function waitForEnter(): Promise<void> {
 }
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
 
   const session = await client.sessions.create();

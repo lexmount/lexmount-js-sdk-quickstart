@@ -1,8 +1,6 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 function buildConnectionUrl(client: Lexmount): string {
   const base = new URL(client.baseUrl);
@@ -17,12 +15,13 @@ function buildConnectionUrl(client: Lexmount): string {
 }
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   let browser: Browser | undefined;
 
   try {
     const connectionUrl = buildConnectionUrl(client);
-    console.log(`connection_url: ${connectionUrl}`);
+    console.log('Connecting through /connection (credentials omitted).');
 
     browser = await chromium.connectOverCDP(connectionUrl);
     const context = browser.contexts()[0];

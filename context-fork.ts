@@ -1,9 +1,8 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { ContextLockedError, ContextNotFoundError, Lexmount } from 'lexmount';
 
-config({ override: true });
-
 async function main(): Promise<void> {
+  await ensureCredentials();
   const sourceId = process.argv[2];
   if (!sourceId) {
     throw new Error('Usage: npm run context-fork -- <context_id>');

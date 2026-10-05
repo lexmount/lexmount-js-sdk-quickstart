@@ -1,4 +1,4 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
 
@@ -52,7 +52,7 @@ export function normalizeWindowSize(value: string): string {
 }
 
 async function main(): Promise<void> {
-  config({ override: true });
+  await ensureCredentials();
   const rawWindowSize =
     getWindowSizeArg(process.argv.slice(2)) ?? process.env.LEXMOUNT_WINDOW_SIZE ?? '1920,1080';
   const windowSize = normalizeWindowSize(rawWindowSize);
