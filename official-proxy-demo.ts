@@ -1,4 +1,4 @@
-import { ensureCredentials } from './quickstart-auth';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
 

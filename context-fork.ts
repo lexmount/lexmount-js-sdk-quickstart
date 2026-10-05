@@ -1,4 +1,4 @@
-import { ensureCredentials } from './quickstart-auth';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { ContextLockedError, ContextNotFoundError, Lexmount } from 'lexmount';
 
 async function main(): Promise<void> {

@@ -1,4 +1,4 @@
-import { ensureCredentials } from './quickstart-auth';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { Lexmount } from 'lexmount';
 
 async function waitForEnter(): Promise<void> {

@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { setTimeout as delay } from 'node:timers/promises';
-import { ensureCredentials } from './quickstart-auth';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
 
