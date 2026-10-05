@@ -1,5 +1,5 @@
 import { access } from 'node:fs/promises';
-import { ensureCredentials } from './quickstart-auth';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { APIError, Lexmount } from 'lexmount';
 
 async function main(): Promise<void> {

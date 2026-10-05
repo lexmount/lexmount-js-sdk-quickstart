@@ -1,14 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { createServer, request } from 'node:http';
 import { execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { parse } from 'dotenv';
-import { authorize, canOpenBrowser, ensureCredentials, saveCredentials, DEFAULT_BASE_URL } from './quickstart-auth';
+import { authorize, canOpenBrowser, ensureCredentials, saveCredentials, DEFAULT_BASE_URL } from './quickstart-auth.ts';
 
+const repoDirectory = fileURLToPath(new URL('.', import.meta.url));
 const credentials = { ok: true, project_id: 'project-test', api_key: 'api-test-only', api_base_url: DEFAULT_BASE_URL };
 const site = 'https://browser.lexmount.com';
 async function fixture(t: { after: (fn: () => Promise<unknown>) => void }, text = '') {
@@ -197,7 +199,7 @@ test('HTTP exchange posts the code, verifier and redirect URI and reads credenti
   }
 });
 
-test('every demo stops before network access when credentials are missing in CI', async t => {
+async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void }, native: boolean) {
   const file = await fixture(t);
   const cwd = path.dirname(file);
   const guard = path.join(cwd, 'no-network.cjs');
@@ -207,20 +209,31 @@ test('every demo stops before network access when credentials are missing in CI'
       if (typeof args[0] === 'number' || args[0]?.port) throw new Error('unexpected network');
       return original.apply(this, args);
     };`);
-  const scripts = (JSON.parse(await fs.readFile(path.join(__dirname, 'package.json'), 'utf8')) as
+  const scripts = (JSON.parse(await fs.readFile(path.join(repoDirectory, 'package.json'), 'utf8')) as
     { scripts: Record<string, string> }).scripts;
   const demos = Object.entries(scripts).filter(([name]) => name !== 'test');
   assert.equal(demos.length, 19);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('LEXMOUNT_')));
   env.CI = '1';
   for (const [name, script] of demos) {
-    const demo = path.resolve(__dirname, script.replace('tsx ', ''));
+    const demo = path.resolve(repoDirectory, script.replace('tsx ', ''));
     const { code, stderr } = await new Promise<{ code: number | string | undefined; stderr: string }>(resolve => {
-      execFile(process.execPath, ['--require', guard, path.join(__dirname, 'node_modules/tsx/dist/cli.mjs'), demo],
+      const runner = native ? [] : [path.join(repoDirectory, 'node_modules/tsx/dist/cli.mjs')];
+      execFile(process.execPath, ['--require', guard, ...runner, demo],
         { cwd, env, timeout: 15000 }, (error, _stdout, stderr) => resolve({ code: error?.code ?? undefined, stderr }));
     });
     assert.equal(code, 1, name);
     assert.match(stderr, /Lexmount credentials are missing/, name);
     assert.equal(stderr.includes('unexpected network'), false, name);
   }
+}
+
+test('all 19 demos reach credential setup through tsx before network access', async t => {
+  await checkDemoStartup(t, false);
 });
+
+const nativeTypeScript = (process.features as { typescript?: string }).typescript;
+test('all 19 demos reach credential setup through native node before network access',
+  { skip: !nativeTypeScript && 'Requires Node with native TypeScript enabled (22.18+ or 24+)' }, async t => {
+    await checkDemoStartup(t, true);
+  });

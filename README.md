@@ -104,7 +104,8 @@ Quick start examples for the Lexmount Node.js SDK.
 
 ## Quick Start
 
-Requires Node.js 18.17 or newer.
+Requires Node.js 18.17 or newer for the `npm run` commands below (which use `tsx`).
+You can also run `node demo.ts` directly with Node.js 22.18+ or 24+; the same applies to every demo. See [Node.js TypeScript support](https://nodejs.org/api/typescript.html).
 
 ```bash
 # 1. Install dependencies

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { getWindowSizeArg, normalizeWindowSize } from './window-size-demo';
+import { getWindowSizeArg, normalizeWindowSize } from './window-size-demo.ts';
 
 test('reads all supported window-size spellings', () => {
   assert.equal(getWindowSizeArg(['--window_size', '800,600']), '800,600');

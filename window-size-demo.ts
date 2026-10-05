@@ -1,4 +1,6 @@
-import { ensureCredentials } from './quickstart-auth';
+import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
 
@@ -90,7 +92,7 @@ async function main(): Promise<void> {
   }
 }
 
-if (require.main === module) {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   main().catch((error: unknown) => {
     console.error(error);
     process.exit(1);

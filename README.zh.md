@@ -104,7 +104,8 @@ Lexmount Node.js SDK 的快速开始示例项目。
 
 ## 快速开始
 
-需要 Node.js 18.17 或更新版本。
+以下 `npm run` 命令通过 `tsx` 执行，需要 Node.js 18.17 或更新版本。
+使用 Node.js 22.18+ 或 24+ 时，也可直接执行 `node demo.ts`，所有 demo 都支持此方式。参见 [Node.js TypeScript 支持说明](https://nodejs.org/api/typescript.html)。
 
 ```bash
 # 1. 安装依赖
