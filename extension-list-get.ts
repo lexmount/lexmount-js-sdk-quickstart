@@ -1,10 +1,9 @@
 import { access } from 'node:fs/promises';
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { APIError, Lexmount } from 'lexmount';
 
-config({ override: true });
-
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   const extensionPath = process.env.LEXMOUNT_EXTENSION_PATH?.trim();
   let uploadedExtensionId: string | undefined;

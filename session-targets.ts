@@ -1,9 +1,7 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { createInterface } from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 interface SessionTarget {
   id: string;
@@ -20,6 +18,7 @@ type SessionsWithTargets = {
 };
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   let sessionId: string | null = null;
   const readline = createInterface({ input, output });

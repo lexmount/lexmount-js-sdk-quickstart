@@ -1,9 +1,8 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { Lexmount } from 'lexmount';
 
-config({ override: true });
-
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   const createdContextIds: string[] = [];
 

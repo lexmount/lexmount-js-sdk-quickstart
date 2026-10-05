@@ -1,8 +1,6 @@
-import { config } from 'dotenv';
+import { ensureCredentials } from './quickstart-auth';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
-
-config({ override: true });
 
 function buildProxyConfig() {
   const server = process.env.LEXMOUNT_PROXY_SERVER?.trim();
@@ -19,6 +17,7 @@ function buildProxyConfig() {
 }
 
 async function main(): Promise<void> {
+  await ensureCredentials();
   const client = new Lexmount();
   const proxy = buildProxyConfig();
   let browser: Browser | undefined;
