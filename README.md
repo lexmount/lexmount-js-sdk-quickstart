@@ -81,6 +81,10 @@ Quick start examples for the Lexmount Node.js SDK.
 - Create a session with `proxy`
 - Verify the remote browser can access pages through the upstream proxy
 
+### `local-proxy-demo.ts` - Local network proxy demo
+- Access an internal page using the SDK machine's network and DNS
+- Open a tunnel, navigate and screenshot, then clean up the session and tunnel
+
 ### `official-proxy-demo.ts` - Official proxy demo
 - Create a session with `officialProxy: true`
 - Verify the remote browser can access pages through the Lexmount official proxy pool
@@ -131,6 +135,7 @@ npm run context-modes
 npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
+npm run local-proxy-demo -- --url http://oa.company.internal/
 npm run official-proxy-demo
 npm run inspect-url-demo
 npm run session-targets
@@ -164,3 +169,23 @@ Every demo checks `LEXMOUNT_PROJECT_ID` and `LEXMOUNT_API_KEY` before making API
 - No credentials are saved on an unsuccessful exchange. If `.env` is changed while signing in, rerun the demo to avoid overwriting those edits. Do not commit `.env`.
 
 Run examples from this repository directory so they share the same `.env`.
+
+## Access your company network with the local proxy
+
+`local-proxy-demo.ts` uses SDK **0.6.0**, opens a separate local-network tunnel, then creates a normal cloud browser with that tunnel. Run it on the machine connected to your company network or VPN. Target DNS and TCP connections use this machine's network. The API environment and selected region must have the local proxy gateway deployed, and the project must have `custom_proxy` enabled.
+
+After installing dependencies and setting credentials, run:
+
+```bash
+npm run local-proxy-demo -- --url http://oa.company.internal/
+# Optional: select a catalog region available at LEXMOUNT_BASE_URL
+npm run local-proxy-demo -- --url http://oa.company.internal/ --region <region-id>
+```
+
+Alternatively, set `LEXMOUNT_LOCAL_PROXY_URL` and optional `LEXMOUNT_REGION` in `.env`; explicit CLI flags override these values. `--help` works without credentials or API access. Use `npm run catalog-info` for available regions.
+
+The demo prints the page title, saves `local_proxy_demo.png`, then closes the browser, cloud session, tunnel and client. Sessions and tunnels are also closed when navigation fails. One client keeps the project, API key and region consistent.
+
+Use an internal hostname or LAN IP for the target. Chrome has [implicit proxy bypass rules](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules) for localhost/loopback and link-local addresses, so `127.0.0.1` is not a reliable address for this demo. The cloud browser still needs its own website login and certificate trust.
+
+The declared SDK 0.6.0 dependency must be published to npm before the standard dependency-install command can succeed.

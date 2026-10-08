@@ -20,6 +20,7 @@
     "extension-basic": "tsx ./extension-basic.ts",
     "extension-list-get": "tsx ./extension-list-get.ts",
     "proxy-demo": "tsx ./proxy-demo.ts",
+    "local-proxy-demo": "tsx ./local-proxy-demo.ts",
     "official-proxy-demo": "tsx ./official-proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
     "session-targets": "tsx ./session-targets.ts",
@@ -38,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.5.16",
+    "lexmount": "^0.6.0",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
