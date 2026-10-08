@@ -2,6 +2,7 @@ import { parseArgs } from 'node:util';
 import { chromium } from 'playwright';
 import { Lexmount } from 'lexmount';
 import { ensureCredentials } from './quickstart-auth.ts';
+import { waitForKeypress } from './wait-for-keypress.ts';
 
 async function main(): Promise<void> {
   const { values } = parseArgs({
@@ -13,20 +14,20 @@ async function main(): Promise<void> {
   });
   if (values.help) {
     console.log('Usage: npm run local-proxy-demo -- --url http://oa.company.internal/ [--region <region-id>]');
-    console.log('Defaults: LEXMOUNT_LOCAL_PROXY_URL and LEXMOUNT_REGION from .env.');
+    console.log('Optional region defaults to LEXMOUNT_REGION from .env.');
     return;
   }
 
-  await ensureCredentials();
-  const target = values.url ?? process.env.LEXMOUNT_LOCAL_PROXY_URL?.trim();
+  const target = values.url;
   if (!target) {
-    throw new Error('Set LEXMOUNT_LOCAL_PROXY_URL or pass --url with an HTTP(S) URL reachable from this machine.');
+    throw new Error('Pass --url with an HTTP(S) URL reachable from this machine.');
   }
   const url = new URL(target);
   if (!['http:', 'https:'].includes(url.protocol)) {
     throw new Error('The local proxy demo requires an HTTP(S) URL.');
   }
 
+  await ensureCredentials();
   const region = values.region ?? (process.env.LEXMOUNT_REGION?.trim() || undefined);
   const client = new Lexmount({ region });
   try {
@@ -49,6 +50,7 @@ async function main(): Promise<void> {
           console.log(`Page title: ${await page.title()}`);
           await page.screenshot({ path: 'local_proxy_demo.png' });
           console.log('Saved screenshot to local_proxy_demo.png');
+          await waitForKeypress();
         } finally {
           await browser.close();
         }
