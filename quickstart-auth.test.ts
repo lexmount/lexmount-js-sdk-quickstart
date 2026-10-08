@@ -212,7 +212,7 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
   const scripts = (JSON.parse(await fs.readFile(path.join(repoDirectory, 'package.json'), 'utf8')) as
     { scripts: Record<string, string> }).scripts;
   const demos = Object.entries(scripts).filter(([name]) => name !== 'test');
-  assert.equal(demos.length, 19);
+  assert.equal(demos.length, 20);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('LEXMOUNT_')));
   env.CI = '1';
   for (const [name, script] of demos) {
@@ -228,12 +228,12 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
   }
 }
 
-test('all 19 demos reach credential setup through tsx before network access', async t => {
+test('all 20 demos reach credential setup through tsx before network access', async t => {
   await checkDemoStartup(t, false);
 });
 
 const nativeTypeScript = (process.features as { typescript?: string }).typescript;
-test('all 19 demos reach credential setup through native node before network access',
+test('all 20 demos reach credential setup through native node before network access',
   { skip: !nativeTypeScript && 'Requires Node with native TypeScript enabled (22.18+ or 24+)' }, async t => {
     await checkDemoStartup(t, true);
   });

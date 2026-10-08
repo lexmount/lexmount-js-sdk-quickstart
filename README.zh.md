@@ -81,6 +81,10 @@ Lexmount Node.js SDK 的快速开始示例项目。
 - 使用 `proxy` 创建会话
 - 验证远程浏览器可以通过上游代理访问页面
 
+### `local-proxy-demo.ts` - 本地网络代理示例
+- 通过 SDK 所在机器的网络和 DNS 访问内网页面
+- 打开隧道、访问并截图，结束或失败时清理会话和隧道
+
 ### `official-proxy-demo.ts` - 官方代理示例
 - 使用 `officialProxy: true` 创建会话
 - 验证远程浏览器可以通过 Lexmount 官方代理池访问页面
@@ -131,6 +135,7 @@ npm run context-modes
 npm run extension-basic
 npm run extension-list-get
 npm run proxy-demo
+npm run local-proxy-demo -- --url http://oa.company.internal/
 npm run official-proxy-demo
 npm run inspect-url-demo
 npm run session-targets
@@ -164,3 +169,23 @@ LEXMOUNT_WINDOW_SIZE=1920,1080
 - 交换失败时不写入凭据；若授权期间修改了 `.env`，请重跑以免覆盖改动。不要提交 `.env`。
 
 请在仓库目录执行各 demo，让它们共用同一个 `.env`。
+
+## 通过本地代理访问公司内网
+
+`local-proxy-demo.ts` 使用 SDK **0.6.0**，先打开独立的本地网络隧道，再创建使用该隧道的 normal 云浏览器。请在已接入公司网络或 VPN 的机器上运行；目标域名解析和 TCP 连接由这台机器完成。API 环境和所选区域需要部署本地代理网关，项目需要启用 `custom_proxy`。
+
+安装依赖并配置凭据后运行：
+
+```bash
+npm run local-proxy-demo -- --url http://oa.company.internal/
+# 可选：指定 LEXMOUNT_BASE_URL 对应目录中的区域
+npm run local-proxy-demo -- --url http://oa.company.internal/ --region <region-id>
+```
+
+也可以在 `.env` 中设置 `LEXMOUNT_LOCAL_PROXY_URL` 和可选的 `LEXMOUNT_REGION`；命令行参数优先。`--help` 无需凭据，也不会访问 API。区域列表可通过 `npm run catalog-info` 查询。
+
+demo 输出页面标题、保存 `local_proxy_demo.png`，随后关闭浏览器、云端会话、隧道和客户端。导航失败时也会清理会话与隧道。整个流程使用同一个客户端，保持 Project ID、API Key 和区域一致。
+
+目标请使用内网域名或局域网 IP。Chrome 对 localhost、回环及链路本地地址有[默认绕过代理规则](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules)，因此不要用 `127.0.0.1` 作为本示例的目标地址。网站登录状态和证书信任仍由云浏览器自行处理。
+
+声明的 SDK 0.6.0 需要先发布到 npm，标准依赖安装命令才能成功。
