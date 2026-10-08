@@ -219,7 +219,7 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
     const demo = path.resolve(repoDirectory, script.replace('tsx ', ''));
     const { code, stderr } = await new Promise<{ code: number | string | undefined; stderr: string }>(resolve => {
       const runner = native ? [] : [path.join(repoDirectory, 'node_modules/tsx/dist/cli.mjs')];
-      execFile(process.execPath, ['--require', guard, ...runner, demo],
+      execFile(process.execPath, ['--require', guard, ...runner, demo, ...(name === 'local-proxy-demo' ? ['--url', 'http://oa.example.test/'] : [])],
         { cwd, env, timeout: 15000 }, (error, _stdout, stderr) => resolve({ code: error?.code ?? undefined, stderr }));
     });
     assert.equal(code, 1, name);

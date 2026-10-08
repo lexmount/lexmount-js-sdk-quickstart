@@ -182,9 +182,9 @@ npm run local-proxy-demo -- --url http://oa.company.internal/
 npm run local-proxy-demo -- --url http://oa.company.internal/ --region <region-id>
 ```
 
-Alternatively, set `LEXMOUNT_LOCAL_PROXY_URL` and optional `LEXMOUNT_REGION` in `.env`; explicit CLI flags override these values. `--help` works without credentials or API access. Use `npm run catalog-info` for available regions.
+The target URL is required via `--url`. You can set optional `LEXMOUNT_REGION` in `.env`; `--region` takes precedence. `--help` works without credentials or API access.
 
-The demo prints the page title, saves `local_proxy_demo.png`, then closes the browser, cloud session, tunnel and client. Sessions and tunnels are also closed when navigation fails. One client keeps the project, API key and region consistent.
+The demo prints the page title, saves `local_proxy_demo.png`, then waits for any key before closing the browser, cloud session, tunnel and client. The browser and local connector stay available while waiting; Ctrl+C also triggers cleanup. End-of-input allows noninteractive runs to finish. Sessions and tunnels are also closed when navigation fails. One client keeps the project, API key and region consistent.
 
 Use an internal hostname or LAN IP for the target. Chrome has [implicit proxy bypass rules](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules) for localhost/loopback and link-local addresses, so `127.0.0.1` is not a reliable address for this demo. The cloud browser still needs its own website login and certificate trust.
 
