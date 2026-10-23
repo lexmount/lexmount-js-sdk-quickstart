@@ -189,3 +189,26 @@ demo 输出页面标题、保存 `local_proxy_demo.png`，随后等待用户按�
 目标请使用内网域名或局域网 IP。Chrome 对 localhost、回环及链路本地地址有[默认绕过代理规则](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules)，因此不要用 `127.0.0.1` 作为本示例的目标地址。网站登录状态和证书信任仍由云浏览器自行处理。
 
 声明的 SDK 0.6.0 需要先发布到 npm，标准依赖安装命令才能成功。
+
+## Browser Agent API（预览）
+
+配套 SDK：[PR](https://github.com/lexmount/lexmount-js-sdk/pull/29)，已验证提交 `4ed7b51143e5a178f028e62ab6c1bfce2e955f86`。请先在 SDK 源码目录切到该改动，再按下方方式安装。
+
+这些示例依赖配套 SDK 改动和已开启公共 API 的服务端；当前已发布版本尚不包含新接口。先在旁边的 `lexmount-js-sdk` 源码目录执行 `npm ci && npm run build`，再在本目录执行 `npm install` 和 `npm install --no-save ../lexmount-js-sdk`。
+
+```bash
+export LEXMOUNT_API_KEY='your-server-side-key'
+export LEXMOUNT_PROJECT_ID='your-project-id'
+export LEXMOUNT_BASE_URL='https://api.lexmount.com'
+npm run browser-agent
+npm run browser-agent-advanced
+npm run browser-agent-recovery
+```
+
+- 基础示例创建标准 Run 并等待；201 只表示已受理。任务失败仍正常返回 Run。
+- advanced 示例保存带 `{{topic}}` 变量和 JSON Schema 的 Agent，读取原生对象结果和 usage；Agent 保留供后续复用。
+- recovery 示例在 POST 前保存业务 ID、原始请求和幂等键，收到回执后保存 Run ID。使用同一文件重跑即可恢复；丢失回执时重用原键和请求，已有 Run ID 时仅 GET/wait。未确认回执超过七天后先核对原请求，不要自动创建新任务。
+
+基础/advanced 示例可用 `RUN_IDEMPOTENCY_KEY` 固定一次 Run 创建的键；保存 Agent 则用独立的 `AGENT_IDEMPOTENCY_KEY`。重跑 advanced 时需同时固定两个键，防止新 Agent ID 改变 Run 请求。不同业务创建使用不同键，跨进程恢复优先使用 recovery 示例。
+
+`RunWaitTimeout` 只停止本地等待，不会取消或重建任务；用已保存 ID 继续 GET/wait。API Key 不应放进 URL、日志或浏览器端代码。`usage.credits=null` 表示计量尚未确认，不能当成零费用。示例显式选择 COM origin，现有 SDK 默认站点保持兼容。凭据检查与浏览器登录沿用本仓已有流程。

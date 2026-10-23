@@ -189,3 +189,28 @@ The demo prints the page title, saves `local_proxy_demo.png`, then waits for any
 Use an internal hostname or LAN IP for the target. Chrome has [implicit proxy bypass rules](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules) for localhost/loopback and link-local addresses, so `127.0.0.1` is not a reliable address for this demo. The cloud browser still needs its own website login and certificate trust.
 
 The declared SDK 0.6.0 dependency must be published to npm before the standard dependency-install command can succeed.
+
+## Browser Agent API (preview)
+
+Companion SDK: [PR](https://github.com/lexmount/lexmount-js-sdk/pull/29), tested commit `4ed7b51143e5a178f028e62ab6c1bfce2e955f86`. Check out that change before the local install below.
+
+These examples require the companion Browser Agent SDK change; the current pinned SDK release does not include it yet. To review locally, build the sibling `lexmount-js-sdk` checkout (`npm ci && npm run build`), then run `npm install` here followed by `npm install --no-save ../lexmount-js-sdk`. Use the API origin supplied for your deployment.
+
+```bash
+export LEXMOUNT_API_KEY='your-server-side-key'
+export LEXMOUNT_PROJECT_ID='your-project-id'
+export LEXMOUNT_BASE_URL='https://api.lexmount.com'
+npm run browser-agent
+npm run browser-agent-advanced
+npm run browser-agent-recovery
+```
+
+- `browser-agent.ts`: create a standard Run, then wait; 201 means accepted. Task failure is a normal Run result.
+- `browser-agent-advanced.ts`: save an Agent with a JSON Schema and `{{topic}}` variable; read native object output and usage. The saved Agent remains available for reuse.
+- `browser-agent-recovery.ts`: persist a business ID, exact request, idempotency key and Run ID in a local file before/after POST. Rerun the same file to recover. A lost response uses the original key; a known Run uses GET/wait. Do not use an unknown receipt's key beyond 7 days without reconciliation.
+
+Set `RUN_IDEMPOTENCY_KEY` to reuse a Run create across retries, and a separate `AGENT_IDEMPOTENCY_KEY` for Agent creation. Repeating the advanced example requires both keys so the Agent ID in the Run request stays unchanged. Prefer the recovery example for process restarts. Separate independent creates need separate keys. SDK retries within one method call reuse its key.
+
+`RunWaitTimeout` only stops local waiting; it does not cancel or recreate the Run. Resume GET/wait with the saved ID. Keep API keys out of URLs, logs and public browser code. `usage.credits=null` means unconfirmed metering; browser time is billed separately. The explicit COM origin avoids changing existing SDK defaults.
+
+These examples use the existing credential setup flow described above.

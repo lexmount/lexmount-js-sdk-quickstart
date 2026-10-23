@@ -24,7 +24,10 @@
     "official-proxy-demo": "tsx ./official-proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
     "session-targets": "tsx ./session-targets.ts",
-    "session-downloads": "tsx ./session-downloads.ts"
+    "session-downloads": "tsx ./session-downloads.ts",
+    "browser-agent": "tsx ./browser-agent.ts",
+    "browser-agent-advanced": "tsx ./browser-agent-advanced.ts",
+    "browser-agent-recovery": "tsx ./browser-agent-recovery.ts"
   },
   "keywords": [
     "lexmount",
