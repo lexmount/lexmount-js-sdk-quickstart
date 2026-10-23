@@ -1,0 +1,32 @@
+name: browser-agent-preview
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: examples
+      - uses: actions/checkout@v4
+        with:
+          repository: lexmount/lexmount-js-sdk
+          ref: 19fcdfe27a6593afff0a79a593b1e848d7393741
+          path: sdk
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the companion SDK
+        working-directory: sdk
+        run: npm ci && npm run build && npm pack --ignore-scripts
+      - name: Install preview and validate examples
+        working-directory: examples
+        run: |
+          npm install --ignore-scripts
+          npm install --no-save --package-lock=false ../sdk/lexmount-0.6.1.tgz
+          npm test
+          npx tsc --noEmit

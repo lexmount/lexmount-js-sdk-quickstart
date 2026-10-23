@@ -192,7 +192,7 @@ The declared SDK 0.6.0 dependency must be published to npm before the standard d
 
 ## Browser Agent API (preview)
 
-Companion SDK: [PR](https://github.com/lexmount/lexmount-js-sdk/pull/29), tested commit `4ed7b51143e5a178f028e62ab6c1bfce2e955f86`. Check out that change before the local install below.
+Companion SDK: [PR](https://github.com/lexmount/lexmount-js-sdk/pull/29), tested commit `19fcdfe27a6593afff0a79a593b1e848d7393741`. Check out that change before the local install below.
 
 These examples require the companion Browser Agent SDK change; the current pinned SDK release does not include it yet. To review locally, build the sibling `lexmount-js-sdk` checkout (`npm ci && npm run build`), then run `npm install` here followed by `npm install --no-save ../lexmount-js-sdk`. Use the API origin supplied for your deployment.
 
@@ -214,3 +214,10 @@ Set `RUN_IDEMPOTENCY_KEY` to reuse a Run create across retries, and a separate `
 `RunWaitTimeout` only stops local waiting; it does not cancel or recreate the Run. Resume GET/wait with the saved ID. Keep API keys out of URLs, logs and public browser code. `usage.credits=null` means unconfirmed metering; browser time is billed separately. The explicit COM origin avoids changing existing SDK defaults.
 
 These examples use the existing credential setup flow described above.
+
+
+### Browser Agent preview validation
+
+The `browser-agent-preview` CI workflow explicitly builds/installs the pinned companion SDK source before running tests. The registry dependency alone does not contain this API yet. Keep this quickstart PR in draft until the SDK is released and this repository's dependency is updated to that release.
+
+Recovery files bind the original Project ID and API origin, with no API key saved. Reusing a file in another project/service, using an old unscoped file or losing its idempotency key is rejected before any Run request. Reconcile the original task instead of deleting the file and rerunning. On POSIX, file contents and directory entries are synced before POST and after the receipt rename. A known Run ID uses GET/wait even after the seven-day create-key window.
