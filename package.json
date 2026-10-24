@@ -24,7 +24,10 @@
     "official-proxy-demo": "tsx ./official-proxy-demo.ts",
     "inspect-url-demo": "tsx ./inspect-url-demo.ts",
     "session-targets": "tsx ./session-targets.ts",
-    "session-downloads": "tsx ./session-downloads.ts"
+    "session-downloads": "tsx ./session-downloads.ts",
+    "browser-agent": "tsx ./browser-agent.ts",
+    "browser-agent-advanced": "tsx ./browser-agent-advanced.ts",
+    "browser-agent-recovery": "tsx ./browser-agent-recovery.ts"
   },
   "keywords": [
     "lexmount",
@@ -39,7 +42,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "^0.6.0",
+    "lexmount": "0.7.0",
     "playwright": "^1.52.0"
   },
   "devDependencies": {

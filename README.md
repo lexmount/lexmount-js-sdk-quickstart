@@ -172,7 +172,7 @@ Run examples from this repository directory so they share the same `.env`.
 
 ## Access your company network with the local proxy
 
-`local-proxy-demo.ts` uses SDK **0.6.0**, opens a separate local-network tunnel, then creates a normal cloud browser with that tunnel. Run it on the machine connected to your company network or VPN. Target DNS and TCP connections use this machine's network. The API environment and selected region must have the local proxy gateway deployed, and the project must have `custom_proxy` enabled.
+`local-proxy-demo.ts` uses SDK **0.7.0**, opens a separate local-network tunnel, then creates a normal cloud browser with that tunnel. Run it on the machine connected to your company network or VPN. Target DNS and TCP connections use this machine's network. The API environment and selected region must have the local proxy gateway deployed, and the project must have `custom_proxy` enabled.
 
 After installing dependencies and setting credentials, run:
 
@@ -188,4 +188,33 @@ The demo prints the page title, saves `local_proxy_demo.png`, then waits for any
 
 Use an internal hostname or LAN IP for the target. Chrome has [implicit proxy bypass rules](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules) for localhost/loopback and link-local addresses, so `127.0.0.1` is not a reliable address for this demo. The cloud browser still needs its own website login and certificate trust.
 
-The declared SDK 0.6.0 dependency must be published to npm before the standard dependency-install command can succeed.
+## Browser Agent API
+
+This repository pins **Lexmount SDK 0.7.0**, published on npm. Run `npm install` to install it; a sibling SDK checkout is not required. The server must still have its public Browser Agent API enabled and the project configured for access.
+
+All new examples use the credential setup described above: existing credentials are reused; on local macOS/Windows terminals, missing credentials start browser sign-in and authorization, then save the returned Project ID and API key.
+
+```bash
+# Use the automatic sign-in flow above, or configure .env beforehand.
+export LEXMOUNT_BASE_URL='https://api.lexmount.com'
+npm run browser-agent
+npm run browser-agent-advanced
+npm run browser-agent-recovery
+```
+
+- `browser-agent.ts`: create a standard Run, then wait; 201 means accepted. Task failure is a normal Run result.
+- `browser-agent-advanced.ts`: save an Agent with a JSON Schema and `{{topic}}` variable; read native object output and usage. The saved Agent remains available for reuse.
+- `browser-agent-recovery.ts`: persist a business ID, exact request, idempotency key and Run ID in a local file before/after POST. Rerun the same file to recover. A lost response uses the original key; a known Run uses GET/wait. Do not use an unknown receipt's key beyond 7 days without reconciliation.
+
+Set `RUN_IDEMPOTENCY_KEY` to reuse a Run create across retries, and a separate `AGENT_IDEMPOTENCY_KEY` for Agent creation. Repeating the advanced example requires both keys so the Agent ID in the Run request stays unchanged. Prefer the recovery example for process restarts. Separate independent creates need separate keys. SDK retries within one method call reuse its key.
+
+`RunWaitTimeout` only stops local waiting; it does not cancel or recreate the Run. Resume GET/wait with the saved ID. Keep API keys out of URLs, logs and public browser code. `usage.credits=null` means unconfirmed metering; browser time is billed separately. The SDK and these examples default to `https://api.lexmount.com`; an explicit `LEXMOUNT_BASE_URL` still selects CN or a custom environment.
+
+These examples use the existing credential setup flow described above.
+
+
+### Browser Agent installation and regression checks
+
+Run `bash scripts/test-browser-agent.sh` in a clean checkout. It installs the declared `0.7.0` package from npm and checks credential setup, recovery and TypeScript types without a sibling SDK checkout. These checks use local mocks and do not create real Agents or Runs.
+
+Recovery files bind the original Project ID and API origin, with no API key saved. Reusing a file in another project/service, using an old unscoped file or losing its idempotency key is rejected before any Run request. Reconcile the original task instead of deleting the file and rerunning. On POSIX, file contents and directory entries are synced before POST and after the receipt rename. A known Run ID uses GET/wait even after the seven-day create-key window.
