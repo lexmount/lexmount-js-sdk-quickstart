@@ -211,7 +211,7 @@ npm run browser-agent-recovery
 
 Set `RUN_IDEMPOTENCY_KEY` to reuse a Run create across retries, and a separate `AGENT_IDEMPOTENCY_KEY` for Agent creation. Repeating the advanced example requires both keys so the Agent ID in the Run request stays unchanged. Prefer the recovery example for process restarts. Separate independent creates need separate keys. SDK retries within one method call reuse its key.
 
-`RunWaitTimeout` only stops local waiting; it does not cancel or recreate the Run. Resume GET/wait with the saved ID. Keep API keys out of URLs, logs and public browser code. `usage.credits=null` means unconfirmed metering; browser time is billed separately. The explicit COM origin avoids changing existing SDK defaults.
+`RunWaitTimeout` only stops local waiting; it does not cancel or recreate the Run. Resume GET/wait with the saved ID. Keep API keys out of URLs, logs and public browser code. `usage.credits=null` means unconfirmed metering; browser time is billed separately. The SDK and these examples default to `https://api.lexmount.com`; an explicit `LEXMOUNT_BASE_URL` still selects CN or a custom environment.
 
 These examples use the existing credential setup flow described above.
 
