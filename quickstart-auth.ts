@@ -22,6 +22,11 @@ export function hasCredential(value: string | undefined): boolean {
   return !!normalized && !/^(your_|replace_|<|changeme$|placeholder$)/.test(normalized);
 }
 
+export function publicSiteForBaseUrl(baseUrl = process.env.LEXMOUNT_BASE_URL): string {
+  const normalized = (baseUrl?.trim() || DEFAULT_BASE_URL).replace(/\/$/, '');
+  return `${SITES[normalized] ?? SITES[DEFAULT_BASE_URL]}/`;
+}
+
 export function canOpenBrowser(platform = process.platform, env: Env = process.env,
   interactive = !!process.stdin.isTTY): boolean {
   return ['darwin', 'win32'].includes(platform) && interactive
