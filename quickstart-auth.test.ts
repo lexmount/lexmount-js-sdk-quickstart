@@ -8,7 +8,7 @@ import { promises as fs } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { parse } from 'dotenv';
-import { authorize, canOpenBrowser, ensureCredentials, saveCredentials, DEFAULT_BASE_URL } from './quickstart-auth.ts';
+import { authorize, canOpenBrowser, ensureCredentials, saveCredentials, DEFAULT_BASE_URL, USER_AGENT } from './quickstart-auth.ts';
 
 const repoDirectory = fileURLToPath(new URL('.', import.meta.url));
 const credentials = { ok: true, project_id: 'project-test', api_key: 'api-test-only', api_base_url: DEFAULT_BASE_URL };
@@ -168,12 +168,12 @@ test('.cn uses its own website and custom APIs require manual setup', async t =>
 });
 
 
-test('HTTP exchange posts the code, verifier and redirect URI and reads credentials', async () => {
-  const requests: { path: string | undefined; body: Record<string, string> }[] = [];
+test('HTTP exchange posts the code, verifier and redirect URI with the quickstart User-Agent', async () => {
+  const requests: { path: string | undefined; body: Record<string, string>; userAgent: string | undefined }[] = [];
   const server = createServer(async (req, res) => {
     let body = '';
     for await (const chunk of req) body += chunk;
-    requests.push({ path: req.url, body: JSON.parse(body) });
+    requests.push({ path: req.url, body: JSON.parse(body), userAgent: req.headers['user-agent'] });
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(credentials));
   });
@@ -191,6 +191,7 @@ test('HTTP exchange posts the code, verifier and redirect URI and reads credenti
     assert.equal(result.api_key, credentials.api_key);
     assert.equal(requests.length, 1);
     assert.equal(requests[0].path, '/api/connect/codex/exchange');
+    assert.equal(requests[0].userAgent, USER_AGENT);
     assert.equal(requests[0].body.code, 'good');
     assert.match(requests[0].body.code_verifier, /^[A-Za-z0-9_-]{43}$/);
   } finally {

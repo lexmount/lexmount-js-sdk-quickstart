@@ -7,6 +7,7 @@ import path from 'node:path';
 import { parse } from 'dotenv';
 
 export const DEFAULT_BASE_URL = 'https://api.lexmount.com';
+export const USER_AGENT = 'Lexmount-Node.js-Quickstart/1.0';
 const SITES: Record<string, string> = {
   'https://api.lexmount.com': 'https://browser.lexmount.com',
   'https://api.lexmount.cn': 'https://browser.lexmount.cn',
@@ -45,7 +46,8 @@ export function openBrowser(url: string): Promise<boolean> {
 async function exchangeCode(url: string, body: Record<string, string>): Promise<unknown> {
   const response = await fetch(url, {
     method: 'POST', redirect: 'error', signal: AbortSignal.timeout(15000),
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'User-Agent': USER_AGENT },
+    body: JSON.stringify(body),
   });
   if (!response.ok || !response.body) throw new Error('Credential exchange failed.');
   const reader = response.body.getReader();
