@@ -8,7 +8,9 @@ import { promises as fs } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { parse } from 'dotenv';
-import { authorize, canOpenBrowser, ensureCredentials, saveCredentials, DEFAULT_BASE_URL, USER_AGENT } from './quickstart-auth.ts';
+import {
+  authorize, canOpenBrowser, ensureCredentials, publicSiteForBaseUrl, saveCredentials, DEFAULT_BASE_URL, USER_AGENT,
+} from './quickstart-auth.ts';
 
 const repoDirectory = fileURLToPath(new URL('.', import.meta.url));
 const credentials = { ok: true, project_id: 'project-test', api_key: 'api-test-only', api_base_url: DEFAULT_BASE_URL };
@@ -28,6 +30,11 @@ test('complete .env overrides shell credentials without login; default is .com',
   assert.equal(env.LEXMOUNT_PROJECT_ID, 'from-file');
   assert.equal(env.LEXMOUNT_API_KEY, 'file-key');
   assert.equal(env.LEXMOUNT_BASE_URL, DEFAULT_BASE_URL);
+});
+
+test('public demo site matches the configured API environment', () => {
+  assert.equal(publicSiteForBaseUrl('https://api.lexmount.com'), 'https://browser.lexmount.com/');
+  assert.equal(publicSiteForBaseUrl('https://api.lexmount.cn/'), 'https://browser.lexmount.cn/');
 });
 
 test('placeholder/partial/headless credentials fail before login, without changing .env', async t => {

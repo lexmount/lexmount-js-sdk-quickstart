@@ -1,4 +1,4 @@
-import { ensureCredentials } from './quickstart-auth.ts';
+import { ensureCredentials, publicSiteForBaseUrl } from './quickstart-auth.ts';
 import { chromium, type Browser } from 'playwright';
 import { Lexmount } from 'lexmount';
 
@@ -19,11 +19,11 @@ async function main(): Promise<void> {
       throw new Error('No page available after connecting to the remote browser.');
     }
 
-    await page.goto('https://browser.lexmount.cn/');
+    await page.goto(publicSiteForBaseUrl(), { waitUntil: 'domcontentloaded' });
     const pageTitle = await page.title();
     console.log(`Page title: ${pageTitle}`);
 
-    if (!pageTitle.includes('Lexmount Browser')) {
+    if (!pageTitle.includes('Lexmount')) {
       throw new Error(`Unexpected page title: ${pageTitle}`);
     }
 
