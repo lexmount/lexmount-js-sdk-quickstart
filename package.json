@@ -27,7 +27,8 @@
     "session-downloads": "tsx ./session-downloads.ts",
     "browser-agent": "tsx ./browser-agent.ts",
     "browser-agent-advanced": "tsx ./browser-agent-advanced.ts",
-    "browser-agent-recovery": "tsx ./browser-agent-recovery.ts"
+    "browser-agent-recovery": "tsx ./browser-agent-recovery.ts",
+    "usage-demo": "tsx ./usage-demo.ts"
   },
   "keywords": [
     "lexmount",
