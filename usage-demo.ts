@@ -21,6 +21,13 @@ async function main() {
     console.log(JSON.stringify({ endpoint: 'current', request_id: current.request_id,
       status_code: current.status_code, data: current.data }, null, 2));
 
+    // Stay below the default per-consumer two-requests-per-second limit.
+    await new Promise(resolve => setTimeout(resolve, 1100));
+    const history = await client.usage.history({ withResponse: true });
+    console.log(JSON.stringify({ endpoint: 'history', request_id: history.request_id,
+      status_code: history.status_code, data: history.data }, null, 2));
+    const unavailable = history.data.periods.filter(period => period.usage === null).length;
+    console.log(`Periods outside retention: ${unavailable} (null usage is not zero).`);
   } finally {
     client.close();
   }
