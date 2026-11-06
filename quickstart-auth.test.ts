@@ -231,7 +231,7 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
         { cwd, env, timeout: 15000 }, (error, _stdout, stderr) => resolve({ code: error?.code ?? undefined, stderr }));
     });
     assert.equal(code, 1, name);
-    assert.match(stderr, name === 'usage-demo' ? /Set LEXMOUNT_API_KEY/ : /Lexmount credentials are missing/, name);
+    assert.match(stderr, /Lexmount credentials are missing/, name);
     assert.equal(stderr.includes('unexpected network'), false, name);
   }
 }

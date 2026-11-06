@@ -1,17 +1,12 @@
-import 'dotenv/config';
+import { ensureCredentials } from './quickstart-auth.ts';
 import { Lexmount } from 'lexmount';
 
-function required(name: string): string {
-  const value = process.env[name];
-  if (!value) throw new Error(`Set ${name} before running this example.`);
-  return value;
-}
-
 async function main() {
+  await ensureCredentials();
   const client = new Lexmount({
-    apiKey: required('LEXMOUNT_API_KEY'),
-    projectId: required('LEXMOUNT_PROJECT_ID'),
-    baseURL: required('LEXMOUNT_BASE_URL'),
+    apiKey: process.env.LEXMOUNT_API_KEY,
+    projectId: process.env.LEXMOUNT_PROJECT_ID,
+    baseURL: process.env.LEXMOUNT_BASE_URL ?? 'https://api.lexmount.com',
   });
   try {
     if (!('usage' in client)) {
