@@ -220,7 +220,7 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
   const scripts = (JSON.parse(await fs.readFile(path.join(repoDirectory, 'package.json'), 'utf8')) as
     { scripts: Record<string, string> }).scripts;
   const demos = Object.entries(scripts).filter(([name]) => name !== 'test');
-  assert.equal(demos.length, 23);
+  assert.equal(demos.length, 24);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('LEXMOUNT_')));
   env.CI = '1';
   for (const [name, script] of demos) {
@@ -231,17 +231,17 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
         { cwd, env, timeout: 15000 }, (error, _stdout, stderr) => resolve({ code: error?.code ?? undefined, stderr }));
     });
     assert.equal(code, 1, name);
-    assert.match(stderr, /Lexmount credentials are missing/, name);
+    assert.match(stderr, name === 'usage-demo' ? /Set LEXMOUNT_API_KEY/ : /Lexmount credentials are missing/, name);
     assert.equal(stderr.includes('unexpected network'), false, name);
   }
 }
 
-test('all 23 demos reach credential setup through tsx before network access', async t => {
+test('all 24 demos reject missing credentials through tsx before network access', async t => {
   await checkDemoStartup(t, false);
 });
 
 const nativeTypeScript = (process.features as { typescript?: string }).typescript;
-test('all 23 demos reach credential setup through native node before network access',
+test('all 24 demos reject missing credentials through native node before network access',
   { skip: !nativeTypeScript && 'Requires Node with native TypeScript enabled (22.18+ or 24+)' }, async t => {
     await checkDemoStartup(t, true);
   });
