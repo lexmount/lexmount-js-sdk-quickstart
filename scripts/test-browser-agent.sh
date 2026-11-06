@@ -3,6 +3,6 @@ set -euo pipefail
 repo_dir=$(cd "$(dirname "$0")/.." && pwd)
 cd "$repo_dir"
 npm install --ignore-scripts
-node --input-type=module -e "import {VERSION, Lexmount, RunWaitTimeout} from 'lexmount'; if (VERSION !== '0.8.0' || !('browserAgent' in Lexmount.prototype) || !RunWaitTimeout) throw Error('Published Browser Agent SDK 0.8.0 is required')"
+node --input-type=module -e "import {VERSION, Lexmount, RunWaitTimeout} from 'lexmount'; if (VERSION !== '0.8.1' || !('browserAgent' in Lexmount.prototype) || !RunWaitTimeout) throw Error('Published Browser Agent SDK 0.8.1 is required')"
 npm test
 npx --no-install tsc --noEmit
