@@ -28,7 +28,8 @@
     "browser-agent": "tsx ./browser-agent.ts",
     "browser-agent-advanced": "tsx ./browser-agent-advanced.ts",
     "browser-agent-recovery": "tsx ./browser-agent-recovery.ts",
-    "usage-demo": "tsx ./usage-demo.ts"
+    "usage-demo": "tsx ./usage-demo.ts",
+    "session-replay": "tsx ./session-replay.ts"
   },
   "keywords": [
     "lexmount",
@@ -43,7 +44,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "0.8.1",
+    "lexmount": "0.9.0",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
