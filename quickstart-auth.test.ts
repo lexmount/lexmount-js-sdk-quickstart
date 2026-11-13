@@ -220,14 +220,14 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
   const scripts = (JSON.parse(await fs.readFile(path.join(repoDirectory, 'package.json'), 'utf8')) as
     { scripts: Record<string, string> }).scripts;
   const demos = Object.entries(scripts).filter(([name]) => name !== 'test');
-  assert.equal(demos.length, 24);
+  assert.equal(demos.length, 25);
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('LEXMOUNT_')));
   env.CI = '1';
   for (const [name, script] of demos) {
     const demo = path.resolve(repoDirectory, script.replace('tsx ', ''));
     const { code, stderr } = await new Promise<{ code: number | string | undefined; stderr: string }>(resolve => {
       const runner = native ? [] : [path.join(repoDirectory, 'node_modules/tsx/dist/cli.mjs')];
-      execFile(process.execPath, ['--require', guard, ...runner, demo, ...(name === 'local-proxy-demo' ? ['--url', 'http://oa.example.test/'] : [])],
+      execFile(process.execPath, ['--require', guard, ...runner, demo, ...(name === 'local-proxy-demo' ? ['--url', 'http://oa.example.test/'] : name === 'session-replay' ? ['--session-id', 'test-session'] : [])],
         { cwd, env, timeout: 15000 }, (error, _stdout, stderr) => resolve({ code: error?.code ?? undefined, stderr }));
     });
     assert.equal(code, 1, name);
@@ -236,12 +236,12 @@ async function checkDemoStartup(t: { after: (fn: () => Promise<unknown>) => void
   }
 }
 
-test('all 24 demos reject missing credentials through tsx before network access', async t => {
+test('all 25 demos reject missing credentials through tsx before network access', async t => {
   await checkDemoStartup(t, false);
 });
 
 const nativeTypeScript = (process.features as { typescript?: string }).typescript;
-test('all 24 demos reject missing credentials through native node before network access',
+test('all 25 demos reject missing credentials through native node before network access',
   { skip: !nativeTypeScript && 'Requires Node with native TypeScript enabled (22.18+ or 24+)' }, async t => {
     await checkDemoStartup(t, true);
   });
