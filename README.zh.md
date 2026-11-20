@@ -1,6 +1,6 @@
 # lexmount-js-sdk-quickstart
 
-> 发布依赖：请在 SDK 0.10.0 发布到 npm 后安装。回放查询需要部署支持该功能的后端（[backend PR #654](https://github.com/lexmount/lexmount-nodejs-backend/pull/654)）。
+> 发布依赖：请在 SDK 0.11.0 发布到 npm 后安装。回放查询需要部署支持该功能的后端（[backend PR #654](https://github.com/lexmount/lexmount-nodejs-backend/pull/654)）。
 
 > [English](./README.md)
 
@@ -26,7 +26,7 @@ const sessions = await client.sessions.list();
 
 使用平台提供的项目和对应的 `LEXMOUNT_BASE_URL`。不要打印Token、放进URL或交给网页。显式Token模式不会读取环境中的 `LEXMOUNT_API_KEY`，也不能同时传入API Key参数。Token缺失或格式错误会在请求前拒绝；到期、退出登录或撤权由服务端拒绝，不回退Key。服务端必须已开放Execution Token接口，安装SDK本身不会开启功能。
 
-其他命令行示例保留原有API Key／PKCE配置。从公共包仓库安装需等0.10.0正式发布；发布前验证可安装已核验的0.10.0构建产物。本PR不发布SDK。
+其他命令行示例保留原有API Key／PKCE配置。从公共包仓库安装需等0.11.0正式发布；发布前验证可安装已核验的0.11.0构建产物。本PR不发布SDK。
 
 ## 按 Session ID 查询回放链接（SDK 0.10.0）
 
@@ -207,7 +207,7 @@ LEXMOUNT_WINDOW_SIZE=1920,1080
 
 ## 通过本地代理访问公司内网
 
-`local-proxy-demo.ts` 使用 SDK **0.10.0**，先打开独立的本地网络隧道，再创建使用该隧道的 normal 云浏览器。请在已接入公司网络或 VPN 的机器上运行；目标域名解析和 TCP 连接由这台机器完成。API 环境和所选区域需要部署本地代理网关，项目需要启用 `custom_proxy`。
+`local-proxy-demo.ts` 使用 SDK **0.11.0**，先打开独立的本地网络隧道，再创建使用该隧道的 normal 云浏览器。请在已接入公司网络或 VPN 的机器上运行；目标域名解析和 TCP 连接由这台机器完成。API 环境和所选区域需要部署本地代理网关，项目需要启用 `custom_proxy`。
 
 安装依赖并配置凭据后运行：
 
@@ -223,9 +223,17 @@ demo 输出页面标题、保存 `local_proxy_demo.png`，随后等待用户按�
 
 目标请使用内网域名或局域网 IP。Chrome 对 localhost、回环及链路本地地址有[默认绕过代理规则](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules)，因此不要用 `127.0.0.1` 作为本示例的目标地址。网站登录状态和证书信任仍由云浏览器自行处理。
 
+## Browser Agent v2 人工接管
+
+在私密终端打开同一项目已有的 v2 Run。运行中的任务会在暂停后提供浏览器预览，操作完成后按回车恢复。任务已请求帮助时，按提示提交处理结果。项目需开放 `/v2/browser-agent`。
+
+```bash
+RUN_ID='your-v2-run-id' npm run browser-agent-takeover
+```
+
 ## Browser Agent API
 
-本仓依赖固定为**Lexmount SDK 0.10.0**，执行 `npm install` 即可安装，无需 SDK 源码目录。服务端仍需开启公共 Browser Agent API，并为项目配置访问权限。
+本仓依赖固定为**Lexmount SDK 0.11.0**，执行 `npm install` 即可安装，无需 SDK 源码目录。服务端仍需开启公共 Browser Agent API，并为项目配置访问权限。
 
 新增用例沿用上面的凭据初始化流程：已有配置直接使用；本地 macOS/Windows 缺少凭据时，浏览器登录授权后自动获取并保存 Project ID 和 API Key。
 
@@ -247,7 +255,7 @@ npm run browser-agent-recovery
 
 ### Browser Agent 安装与回归验证
 
-在干净的项目目录中执行 `bash scripts/test-browser-agent.sh`，从 npm 安装声明的 `0.10.0` 依赖并运行认证、恢复及类型检查，不依赖旁边的 SDK 源码。测试使用本地模拟，不会创建真实 Agent 或 Run。
+在干净的项目目录中执行 `bash scripts/test-browser-agent.sh`，从 npm 安装声明的 `0.11.0` 依赖并运行认证、恢复及类型检查，不依赖旁边的 SDK 源码。测试使用本地模拟，不会创建真实 Agent 或 Run。
 
 恢复文件绑定原 Project ID 与 API origin，不保存 API Key。切换项目/服务、使用旧的无归属文件或丢失幂等键时，会在任何 Run 请求前拒绝继续；应核对原任务，不能通过删文件重跑来规避。POSIX 下 POST 前及回执重命名后均同步文件/目录。已有 Run ID 时只 GET/wait，不受创建幂等键七天窗口限制。
 
@@ -257,7 +265,7 @@ npm run browser-agent-recovery
 
 查询当前配额周期的 WebFetch 已用次数、基础额度及剩余次数，并查询近一年历史周期的 WebFetch 次数，不创建浏览器 session。打印响应元信息与数据；输出包含项目用量信息，请妥善保存。
 
-仓库固定 SDK 0.10.0，包含当前和历史 WebFetch 用量接口。直接从包仓库安装，无需 SDK 源码目录。
+仓库固定 SDK 0.11.0，包含当前和历史 WebFetch 用量接口。直接从包仓库安装，无需 SDK 源码目录。
 
 ```sh
 npm install

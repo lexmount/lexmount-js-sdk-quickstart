@@ -1,6 +1,6 @@
 # lexmount-js-sdk-quickstart
 
-> Release dependency: install after SDK 0.10.0 is published to npm. Replay lookup requires the replay-enabled backend ([backend PR #654](https://github.com/lexmount/lexmount-nodejs-backend/pull/654)).
+> Release dependency: install after SDK 0.11.0 is published to npm. Replay lookup requires the replay-enabled backend ([backend PR #654](https://github.com/lexmount/lexmount-nodejs-backend/pull/654)).
 
 > [中文](./README.zh.md)
 
@@ -26,7 +26,7 @@ const sessions = await client.sessions.list();
 
 Use the matching `LEXMOUNT_BASE_URL` and project supplied by the platform. Never print the Token, put it in a URL or send it to a webpage. Explicit Token mode ignores an inherited `LEXMOUNT_API_KEY`; do not also pass an API-key argument. Missing/invalid Tokens fail before requests; expired, logged-out or revoked identity is rejected by the server without falling back to a Key. This mode requires the server's Execution Token routes to be enabled; installing the SDK does not enable them.
 
-The other CLI demos retain their existing API-key/PKCE setup. Their public package installation requires SDK 0.10.0 to be published first; for pre-release verification install the reviewed SDK 0.10.0 build artifact locally. This PR does not publish that package.
+The other CLI demos retain their existing API-key/PKCE setup. Their public package installation requires SDK 0.11.0 to be published first; for pre-release verification install the reviewed SDK 0.11.0 build artifact locally. This PR does not publish that package.
 
 ## Query a session's Replay URL (SDK 0.10.0)
 
@@ -207,7 +207,7 @@ Run examples from this repository directory so they share the same `.env`.
 
 ## Access your company network with the local proxy
 
-`local-proxy-demo.ts` uses SDK **0.10.0**, opens a separate local-network tunnel, then creates a normal cloud browser with that tunnel. Run it on the machine connected to your company network or VPN. Target DNS and TCP connections use this machine's network. The API environment and selected region must have the local proxy gateway deployed, and the project must have `custom_proxy` enabled.
+`local-proxy-demo.ts` uses SDK **0.11.0**, opens a separate local-network tunnel, then creates a normal cloud browser with that tunnel. Run it on the machine connected to your company network or VPN. Target DNS and TCP connections use this machine's network. The API environment and selected region must have the local proxy gateway deployed, and the project must have `custom_proxy` enabled.
 
 After installing dependencies and setting credentials, run:
 
@@ -223,9 +223,17 @@ The demo prints the page title, saves `local_proxy_demo.png`, then waits for any
 
 Use an internal hostname or LAN IP for the target. Chrome has [implicit proxy bypass rules](https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#implicit-bypass-rules) for localhost/loopback and link-local addresses, so `127.0.0.1` is not a reliable address for this demo. The cloud browser still needs its own website login and certificate trust.
 
+## Browser Agent v2 human takeover
+
+Use a private terminal and a v2 run in the same project. For a running task, open the browser preview after it pauses, then press Enter to resume. If the agent has requested help, enter the outcome at the prompt. The project API must expose `/v2/browser-agent`.
+
+```bash
+RUN_ID='your-v2-run-id' npm run browser-agent-takeover
+```
+
 ## Browser Agent API
 
-This repository pins **Lexmount SDK 0.10.0**. Run `npm install` to install it; a sibling SDK checkout is not required. The server must still have its public Browser Agent API enabled and the project configured for access.
+This repository pins **Lexmount SDK 0.11.0**. Run `npm install` to install it; a sibling SDK checkout is not required. The server must still have its public Browser Agent API enabled and the project configured for access.
 
 All new examples use the credential setup described above: existing credentials are reused; on local macOS/Windows terminals, missing credentials start browser sign-in and authorization, then save the returned Project ID and API key.
 
@@ -249,7 +257,7 @@ These examples use the existing credential setup flow described above.
 
 ### Browser Agent installation and regression checks
 
-Run `bash scripts/test-browser-agent.sh` in a clean checkout. It installs the declared `0.10.0` package from npm and checks credential setup, recovery and TypeScript types without a sibling SDK checkout. These checks use local mocks and do not create real Agents or Runs.
+Run `bash scripts/test-browser-agent.sh` in a clean checkout. It installs the declared `0.11.0` package from npm and checks credential setup, recovery and TypeScript types without a sibling SDK checkout. These checks use local mocks and do not create real Agents or Runs.
 
 Recovery files bind the original Project ID and API origin, with no API key saved. Reusing a file in another project/service, using an old unscoped file or losing its idempotency key is rejected before any Run request. Reconcile the original task instead of deleting the file and rerunning. On POSIX, file contents and directory entries are synced before POST and after the receipt rename. A known Run ID uses GET/wait even after the seven-day create-key window.
 
@@ -259,7 +267,7 @@ Credential setup matches the other demos: reuse valid Project ID/API Key from `.
 
 Query current-period WebFetch allowance and the past 365 days of WebFetch quota periods, without creating a browser session. Prints response metadata and data. Keep output private if it contains project usage information.
 
-This repository pins the SDK 0.10.0, including current and historical WebFetch usage. Install directly from the package registry; no SDK source checkout is required.
+This repository pins the SDK 0.11.0, including current and historical WebFetch usage. Install directly from the package registry; no SDK source checkout is required.
 
 ```sh
 npm install
