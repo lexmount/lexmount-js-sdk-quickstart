@@ -26,6 +26,7 @@
     "session-targets": "tsx ./session-targets.ts",
     "session-downloads": "tsx ./session-downloads.ts",
     "browser-agent": "tsx ./browser-agent.ts",
+    "browser-agent-takeover": "tsx ./browser-agent-takeover.ts",
     "browser-agent-advanced": "tsx ./browser-agent-advanced.ts",
     "browser-agent-recovery": "tsx ./browser-agent-recovery.ts",
     "usage-demo": "tsx ./usage-demo.ts",
@@ -44,7 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
-    "lexmount": "0.10.0",
+    "lexmount": "0.11.0",
     "playwright": "^1.52.0"
   },
   "devDependencies": {
